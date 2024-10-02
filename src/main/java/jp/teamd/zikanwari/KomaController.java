@@ -35,8 +35,8 @@ public class KomaController {
     }
 
     @PostMapping(path = "edit",params = "form")
-    String editForm(@RequestParam Integer id,KomaForm form){
-        KomaForm bookForm = bookService.findOne(id);
+    String editForm(@RequestParam String season,Integer d_code,Integer s_code,String dayofweak,KomaForm form){
+        KomaForm bookForm = bookService.findOne(season,d_code,s_code,dayofweak);
         BeanUtils.copyProperties(bookForm, form);
         return "pages/edit";
     }
@@ -48,8 +48,8 @@ public class KomaController {
     }
 
     @PostMapping(path = "delete")
-    String delete(@RequestParam Integer id){
-        bookService.delete(id);
+    String delete(@RequestParam String season,Integer d_code,Integer s_code,String dayofweak){
+        bookService.delete(season,d_code,s_code,dayofweak);
         return "redirect:/pages";
     }
 

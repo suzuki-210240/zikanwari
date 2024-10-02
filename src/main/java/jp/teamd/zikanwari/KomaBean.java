@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table( name = "koma")
+@IdClass(KomaId.class)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

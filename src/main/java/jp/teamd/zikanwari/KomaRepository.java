@@ -8,10 +8,11 @@ import org.springframework.beans.BeanUtils;*/
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface KomaRepository extends JpaRepository<KomaBean,Integer>{
+public interface KomaRepository extends JpaRepository<KomaBean,KomaId>{
 
     @Query("SELECT X FROM KomaBean X")
     List<KomaBean> findAllKomaBeans();
+    
 }
 
 //@Repository
