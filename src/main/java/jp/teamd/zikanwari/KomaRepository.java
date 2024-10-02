@@ -8,10 +8,10 @@ import org.springframework.beans.BeanUtils;*/
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface BookRepository extends JpaRepository<BookBean,Integer>{
+public interface KomaRepository extends JpaRepository<KomaBean,Integer>{
 
-    @Query("SELECT X FROM BookBean X ORDER BY X.title")
-    List<BookBean> findAllOrderByTitle();
+    @Query("SELECT X FROM KomaBean X")
+    List<KomaBean> findAllKomaBeans();
 }
 
 //@Repository

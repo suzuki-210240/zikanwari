@@ -12,50 +12,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("books")
-public class BookController {
+@RequestMapping("pages")
+public class KomaController {
     @Autowired
-    BookService bookService;
+    KomaService bookService;
 
     @ModelAttribute
-    BookForm setUpForm(){
-        return new BookForm();
+    KomaForm setUpForm(){
+        return new KomaForm();
     }
 
     @GetMapping
     String list(Model model){
-        model.addAttribute("books",bookService.findAll());
-        return "books/list";
+        model.addAttribute("pages",bookService.findAll());
+        return "pages/list";
     }
 
     @PostMapping(path="create")
-    String create(BookForm form,Model mode){
+    String create(KomaForm form,Model mode){
         bookService.create(form);
-        return "redirect:/books";
+        return "redirect:/pages";
     }
 
     @PostMapping(path = "edit",params = "form")
-    String editForm(@RequestParam Integer id,BookForm form){
-        BookForm bookForm = bookService.findOne(id);
+    String editForm(@RequestParam Integer id,KomaForm form){
+        KomaForm bookForm = bookService.findOne(id);
         BeanUtils.copyProperties(bookForm, form);
-        return "books/edit";
+        return "pages/edit";
     }
 
     @PostMapping(path = "edit")
-    String edit(@RequestParam Integer id,BookForm form){
+    String edit(@RequestParam Integer id,KomaForm form){
         bookService.update(form);
-        return "redirect:/books";
+        return "redirect:/pages";
     }
 
     @PostMapping(path = "delete")
     String delete(@RequestParam Integer id){
         bookService.delete(id);
-        return "redirect:/books";
+        return "redirect:/pages";
     }
 
     @PostMapping(path = "edit",params = "goToTop")
     String goToTop(){
-        return "redirect:/books";
+        return "redirect:/pages";
     }
 }
 
