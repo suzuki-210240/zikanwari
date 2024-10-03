@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari.Bean;
+package jp.teamd.zikanwari.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari.Service;
+package jp.teamd.zikanwari.service;
 
 import java.util.*;
 
@@ -7,36 +7,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.teamd.zikanwari.KomaId;
-import jp.teamd.zikanwari.Bean.KomaBean;
-import jp.teamd.zikanwari.From.KomaForm;
-import jp.teamd.zikanwari.Repository.KomaRepository;
+import jp.teamd.zikanwari.bean.KomaBean;
+import jp.teamd.zikanwari.form.KomaForm;
+import jp.teamd.zikanwari.repository.KomaRepository;
 
 @Service
 public class KomaService {
     @Autowired
-    KomaRepository bookRepository;
+    KomaRepository komaRepository;
 
     public KomaForm create(KomaForm komaForm){
-        //bookForm.setId(bookRepository.getBookId());
+        //komaForm.setId(komaRepository.getBookId());
         KomaBean komaBean = new KomaBean();
         BeanUtils.copyProperties(komaForm, komaBean);
-        bookRepository.save(komaBean);
+        komaRepository.save(komaBean);
         return komaForm;
     }
 
     public KomaForm update(KomaForm komaForm){
         KomaBean komaBean = new KomaBean();
         BeanUtils.copyProperties(komaForm, komaBean);
-        bookRepository.save(komaBean);
+        komaRepository.save(komaBean);
         return komaForm;
     }
 
     public void delete(String season,Integer d_code,Integer s_code,String dayofweak){
         KomaId komaId = new KomaId(season,d_code,s_code,dayofweak);
-        bookRepository.deleteById(komaId);
+        komaRepository.deleteById(komaId);
     }
     public List<KomaForm> findAll(){
-        List<KomaBean> beanList = bookRepository.findAll();
+        List<KomaBean> beanList = komaRepository.findAll();
         List<KomaForm> formList = new ArrayList<KomaForm>();
         for(KomaBean komaBean: beanList){
             KomaForm komaForm = new KomaForm();
@@ -47,11 +47,11 @@ public class KomaService {
     }
     public KomaForm findOne(String season,Integer d_code,Integer s_code,String dayofweak){
         KomaId komaId = new KomaId(season,d_code,s_code,dayofweak);
-        Optional<KomaBean> opt = bookRepository.findById(komaId);
-        KomaForm bookForm = new KomaForm();
-        opt.ifPresent(book ->{
-            BeanUtils.copyProperties(opt.get(), bookForm);
+        Optional<KomaBean> opt = komaRepository.findById(komaId);
+        KomaForm komaForm = new KomaForm();
+        opt.ifPresent(koma ->{
+            BeanUtils.copyProperties(opt.get(), komaForm);
         });
-        return bookForm;
+        return komaForm;
     }
 }
