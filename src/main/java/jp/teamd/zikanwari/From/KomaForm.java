@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari;
+package jp.teamd.zikanwari.From;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari;
+package jp.teamd.zikanwari.Repository;
 
 import java.util.*;
 /*import java.util.concurrent.ConcurrentHashMap;
@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.beans.BeanUtils;*/
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import jp.teamd.zikanwari.KomaId;
+import jp.teamd.zikanwari.Bean.KomaBean;
 
 public interface KomaRepository extends JpaRepository<KomaBean,KomaId>{
 

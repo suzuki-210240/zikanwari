@@ -1,10 +1,15 @@
-package jp.teamd.zikanwari;
+package jp.teamd.zikanwari.Service;
 
 import java.util.*;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jp.teamd.zikanwari.KomaId;
+import jp.teamd.zikanwari.Bean.KomaBean;
+import jp.teamd.zikanwari.From.KomaForm;
+import jp.teamd.zikanwari.Repository.KomaRepository;
 
 @Service
 public class KomaService {

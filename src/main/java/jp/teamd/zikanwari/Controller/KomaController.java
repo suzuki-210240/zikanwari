@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari;
+package jp.teamd.zikanwari.Controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jp.teamd.zikanwari.From.KomaForm;
+import jp.teamd.zikanwari.Service.KomaService;
 
 
 @Controller

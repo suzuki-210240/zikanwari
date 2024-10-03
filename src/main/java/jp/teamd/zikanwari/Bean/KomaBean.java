@@ -1,10 +1,10 @@
-package jp.teamd.zikanwari;
+package jp.teamd.zikanwari.Bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
-//import org.springframework.data.annotation.Id;
+import jp.teamd.zikanwari.KomaId;
 
 @Entity
 @Table( name = "koma")
