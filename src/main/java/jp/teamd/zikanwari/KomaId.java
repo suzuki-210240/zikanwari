@@ -1,7 +1,7 @@
 package jp.teamd.zikanwari;
 
 import java.io.Serializable;
-import jakarta.persistence.Embeddable;
+
 
 public class KomaId implements Serializable{
     private String season; //e:前期,l:後期

@@ -31,7 +31,7 @@ public class TeacherController {
         return "teacher/list";
     }
 
-    @PostMapping(path="tcreate")
+    @PostMapping(path="create")
     String create(TeacherForm form,Model mode){
         teacherService.create(form);
         return "redirect:/teacher";
@@ -53,6 +53,11 @@ public class TeacherController {
     @PostMapping(path = "delete")
     String delete(@RequestParam Integer t_number){
         teacherService.delete(t_number);
+        return "redirect:/teacher";
+    }
+
+    @PostMapping(path = "edit",params = "goToTop")
+    String goToTop(){
         return "redirect:/teacher";
     }
 
