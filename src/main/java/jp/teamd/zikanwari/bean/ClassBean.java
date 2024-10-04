@@ -10,13 +10,13 @@ import jakarta.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherBean {
+public class ClassBean {
     @Id
-    private Integer c_code;
-    private String c_year;
+    private String c_code;
+    private Integer c_year;
     private String c_class;
     @Column(nullable = false)
-    private Integer d_code;
+    private String d_code;
     private String onlineday;
     private Integer btime;
 }

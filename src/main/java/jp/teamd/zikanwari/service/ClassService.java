@@ -6,46 +6,46 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.teamd.zikanwari.bean.classBean;
-import jp.teamd.zikanwari.form.classForm;
-import jp.teamd.zikanwari.repository.classRepository;
+import jp.teamd.zikanwari.bean.ClassBean;
+import jp.teamd.zikanwari.form.ClassForm;
+import jp.teamd.zikanwari.repository.ClassRepository;
 
 @Service
-public class classService {
+public class ClassService {
     @Autowired
-    classRepository classRepository;
+    ClassRepository ClassRepository;
 
-    public classForm create(classForm classForm){
-        classBean classBean = new classBean();
+    public ClassForm create(ClassForm classForm){
+        ClassBean classBean = new ClassBean();
         BeanUtils.copyProperties(classForm, classBean);
-        classRepository.save(classBean);
+        ClassRepository.save(classBean);
         return classForm;
     }
 
-    public classForm update(classForm classForm){
-        classBean classBean = new classBean();
+    public ClassForm update(ClassForm classForm){
+        ClassBean classBean = new ClassBean();
         BeanUtils.copyProperties(classForm, classBean);
-        classRepository.save(classBean);
+        ClassRepository.save(classBean);
         return classForm;
     }
 
     public void delete(Integer c_code){
-        classRepository.deleteById(c_code);
+        ClassRepository.deleteById(c_code);
     }
-    public List<classForm> findAll(){
-        List<classBean> beanList = classRepository.findAll();
-        List<classForm> formList = new ArrayList<classForm>();
-        for(classBean classBean: beanList){
-            classForm classForm = new classForm();
+    public List<ClassForm> findAll(){
+        List<ClassBean> beanList = ClassRepository.findAll();
+        List<ClassForm> formList = new ArrayList<ClassForm>();
+        for(ClassBean classBean: beanList){
+            ClassForm classForm = new ClassForm();
             BeanUtils.copyProperties(classBean, classForm);
             formList.add(classForm);
         }
         return formList;
     }
-    public classForm findOne(Integer c_code){
-        Optional<classBean> opt = classRepository.findById(c_code);
-        classForm classForm = new classForm();
-        opt.ifPresent(class ->{
+    public ClassForm findOne(Integer c_code){
+        Optional<ClassBean> opt = ClassRepository.findById(c_code);
+        ClassForm classForm = new ClassForm();
+        opt.ifPresent(clas ->{
             BeanUtils.copyProperties(opt.get(), classForm);
         });
         return classForm;
