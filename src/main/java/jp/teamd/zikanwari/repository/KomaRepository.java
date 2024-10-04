@@ -13,7 +13,7 @@ import jp.teamd.zikanwari.bean.KomaBean;
 
 public interface KomaRepository extends JpaRepository<KomaBean,KomaId>{
 
-    @Query("SELECT X FROM KomaBean X")
+    @Query("SELECT X FROM KomaBean X ")
     List<KomaBean> findAllKomaBeans();
     
 }
