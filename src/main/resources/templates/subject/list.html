@@ -14,7 +14,7 @@
                 <tr><td>科目名:</td><td><input type="text" name="s_name" th:field="*{s_name}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('s_name')}"th:errors="*{s_name}" class="error-message">error!</span></td></tr>
                 <td>学科コード:</td><td><input type="text" name="c_code" th:field="*{c_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('c_code')}"th:errors="*{c_code}" class="error-message">error!</span></td></tr>
                 <tr><td>担当教員番号:</td><td><input type="text" name="t_number"  th:field="*{t_number}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('t_number')}"th:errors="*{t_number}" class="error-message">error!</span></td></tr>
-                <tr><td>学期科目:</td><td><input type="text" name="s_classification" th:field="*{s_classification}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('s_classification')}"th:errors="*{s_classification}" class="error-message">error!</span></td></tr>
+                <tr><td>履修学期:</td><td><input type="text" name="s_classification" th:field="*{s_classification}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('s_classification')}"th:errors="*{s_classification}" class="error-message">error!</span></td></tr>
                 <tr><td>使用教室番号:</td><td><input type="text" name="use_room_number"  th:field="*{use_room_number}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('use_room_number')}"th:errors="*{use_room_number}" class="error-message">error!</span></td></tr>
             </table>
             <input type="submit" value="作成"/> 
