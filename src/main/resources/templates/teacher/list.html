@@ -23,12 +23,7 @@
                 <td th:text="${teacher.t_name}">サンプル講師</td>
                 <td th:text="${teacher.p_code}">1</td>
                 <td th:text="${teacher.d_code}">js</td>
-                <td>
-                    <form th:action="@{/teacher/t_edit}" method="post">
-                        <input type="submit" name="form" value="編集" />
-                        <input type="hidden" name="t_number" th:value="${teacher.t_number}"/>
-                    </form>
-                </td>
+        
                 <td>
                     <form th:action="@{/teacher/delete}" method="post">
                         <input type="submit" name="form" value="削除" />

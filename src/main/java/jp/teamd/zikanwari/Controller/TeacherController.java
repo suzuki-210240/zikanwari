@@ -37,27 +37,10 @@ public class TeacherController {
         return "redirect:/teacher";
     }
 
-    @PostMapping(path = "edit",params = "form")
-    String editForm(@RequestParam Integer t_number,TeacherForm form){
-        TeacherForm teacherForm = teacherService.findOne(t_number);
-        BeanUtils.copyProperties(teacherForm, form);
-        return "teacher/t_edit";
-    }
-
-    @PostMapping(path = "edit")
-    String edit(@RequestParam Integer t_number,TeacherForm form){
-        teacherService.update(form);
-        return "redirect:/teacher";
-    }
 
     @PostMapping(path = "delete")
     String delete(@RequestParam Integer t_number){
         teacherService.delete(t_number);
-        return "redirect:/teacher";
-    }
-
-    @PostMapping(path = "edit",params = "goToTop")
-    String goToTop(){
         return "redirect:/teacher";
     }
 
