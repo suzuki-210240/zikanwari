@@ -29,7 +29,7 @@ public class DepartmentService {
         return departmentForm;
     }
 
-    public void delete(Integer d_code){
+    public void delete(String d_code){
         departmentRepository.deleteById(d_code);
     }
     public List<DepartmentForm> findAll(){
@@ -42,7 +42,7 @@ public class DepartmentService {
         }
         return formList;
     }
-    public DepartmentForm findOne(Integer d_code){
+    public DepartmentForm findOne(String d_code){
         Optional<DepartmentBean> opt = departmentRepository.findById(d_code);
         DepartmentForm departmentForm = new DepartmentForm();
         opt.ifPresent(department ->{

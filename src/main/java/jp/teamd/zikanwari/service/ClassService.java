@@ -29,7 +29,7 @@ public class ClassService {
         return classForm;
     }
 
-    public void delete(Integer c_code){
+    public void delete(String c_code){
         ClassRepository.deleteById(c_code);
     }
     public List<ClassForm> findAll(){
@@ -42,7 +42,7 @@ public class ClassService {
         }
         return formList;
     }
-    public ClassForm findOne(Integer c_code){
+    public ClassForm findOne(String c_code){
         Optional<ClassBean> opt = ClassRepository.findById(c_code);
         ClassForm classForm = new ClassForm();
         opt.ifPresent(clas ->{

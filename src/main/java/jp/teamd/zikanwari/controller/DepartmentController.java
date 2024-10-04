@@ -1,6 +1,6 @@
 package jp.teamd.zikanwari.controller;
 
-import org.springframework.beans.BeanUtils;
+//import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +39,7 @@ public class DepartmentController {
 
 
     @PostMapping(path = "delete")
-    String delete(@RequestParam Integer d_code){
+    String delete(@RequestParam String d_code){
         departmentService.delete(d_code);
         return "redirect:/department";
     }

@@ -12,7 +12,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 public class DepartmentBean {
     @Id
-    private Integer d_code;
+    private String d_code;
     @Column(nullable = false)
     private String d_name;
 }

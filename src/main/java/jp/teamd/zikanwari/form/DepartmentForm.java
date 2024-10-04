@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DepartmentForm {
+    private String d_code;
     private String d_name;
-    private Integer d_code;
+    
 }

@@ -39,7 +39,7 @@ public class ClassController {
 
 
     @PostMapping(path = "delete")
-    String delete(@RequestParam Integer c_code){
+    String delete(@RequestParam String c_code){
         classService.delete(c_code);
         return "redirect:/class";
     }
