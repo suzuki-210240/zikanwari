@@ -10,37 +10,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jp.teamd.zikanwari.form.TeacherForm;
-import jp.teamd.zikanwari.service.TeacherService;
+import jp.teamd.zikanwari.form.ClassForm;
+import jp.teamd.zikanwari.service.ClassService;
 
 
 @Controller
 @RequestMapping("class")
-public class TeacherController {
+public class ClassController {
     @Autowired
-    TeacherService teacherService;
+    ClassService classService;
 
     @ModelAttribute
-    TeacherForm setUpForm(){
-        return new TeacherForm();
+    ClassForm setUpForm(){
+        return new ClassForm();
     }
 
     @GetMapping
     String list(Model model){
-        model.addAttribute("class",teacherService.findAll());
-        return "teacher/list";
+        model.addAttribute("class",classService.findAll());
+        return "class/list";
     }
 
     @PostMapping(path="create")
-    String create(TeacherForm form,Model mode){
-        teacherService.create(form);
+    String create(ClassForm form,Model mode){
+        classService.create(form);
         return "redirect:/class";
     }
 
 
     @PostMapping(path = "delete")
     String delete(@RequestParam Integer c_code){
-        teacherService.delete(c_code);
+        classService.delete(c_code);
         return "redirect:/class";
     }
 
