@@ -11,7 +11,7 @@
             <table class="table table-striped table-bordered table-condensed">
                 <tr><td>クラス番号:</td><td><input type="text" name="c_code"  th:field="*{c_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('c_code')}"th:errors="*{c_code}" class="error-message">error!</span></td></tr>
                 <tr><td>学年:</td><td><input type="text" name="c_year" th:field="*{c_year}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('c_year')}"th:errors="*{c_year}" class="error-message">error!</span></td></tr>
-                <tr><td>学科コード:</td><td><input type="text" name="c_class" th:field="*{c_class}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('c_class')}"th:errors="*{c_class}" class="error-message">error!</span></td></tr>
+                <tr><td>学科コード:</td><td><input type="text" name="d_code" th:field="*{d_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('d_code')}"th:errors="*{d_code}" class="error-message">error!</span></td></tr>
                 <tr><td>オンライン曜日:</td><td><input type="text" name="onlineday" th:field="*{onlineday}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('onlineday')}"th:errors="*{onlineday}" class="error-message">error!</span></td></tr>
                 <tr><td>休憩時間:</td><td><input type="text" name="btime" th:field="*{btime}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('btime')}"th:errors="*{btime}" class="error-message">error!</span></td></tr>
             </table>
@@ -22,17 +22,18 @@
             <tr th:each="class:${class}">
                 <td th:text="${class.c_code}">999999</td>
                 <td th:text="${class.c_year}">411</td>
-                <td th:text="${class.c_class}">111</td>
+                <td th:text="${class.c_class}">411</td>
+                <td th:text="${class.d_code}">111</td>
                 <td th:text="${class.onlineday}">1111</td>
                 <td th:text="${class.btime}">1111</td>
         
-                <td>
+                {% comment %} <td>
                     <form th:action="@{/class/delete}" method="post">
                         <input type="submit" name="form" value="削除" />
                         <input type="hidden" name="c_code" th:value="${class.c_code}"/>
                     </form>
                 </td>
-            </tr>
+            </tr> {% endcomment %}
         </table>
     </body>
 </html>

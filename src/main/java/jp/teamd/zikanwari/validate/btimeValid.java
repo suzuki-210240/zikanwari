@@ -9,9 +9,9 @@ public class btimeValid {
     @Retention(RetentionPolicy.RUNTIME)
         
     public @interface time{
+
         
-        String ok();
-        String message() default "{ok} を入力してください.";
+        String message() default "31か32";
         //Classオブジェクトを得る（戻り値とする）　メソッドgroups()
         //デフォルト値は空のクラス
         Class<?>[] groups() default{};
