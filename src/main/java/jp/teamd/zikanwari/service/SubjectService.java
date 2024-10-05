@@ -50,4 +50,23 @@ public class SubjectService {
         });
         return subjectForm;
     }
+
+    public List<SubjectForm> findByC_code(String c_code){
+        List<SubjectBean> beanList;
+        List<SubjectForm> formList = new ArrayList<SubjectForm>();
+
+        if (c_code != null) {
+            beanList =  SubjectRepository.findByc_code(c_code);
+        }else{
+            beanList = SubjectRepository.findAll();
+        }
+        
+        
+        for(SubjectBean subjectBean: beanList){
+            SubjectForm subjectForm = new SubjectForm();
+            BeanUtils.copyProperties(subjectBean, subjectForm);
+            formList.add(subjectForm);
+        }
+        return formList;
+    }
 }

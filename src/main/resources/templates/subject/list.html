@@ -9,7 +9,7 @@
     <body>
         <h4>クラスを選択</h4>
         <from action="#" th:action="@{/subject/filter}" method="post">
-            <select name = "item">
+            <select name = "item" id="cbid">
                 <option th:each="item : ${clss}" th:value="${item.c_code}" th:text="${item.c_code}"></option>  
             </select>
             <button type="submit">検索</button>
