@@ -18,4 +18,12 @@ public class SubjectBean {
     private Integer t_number;
     private Integer s_classification;
     private Integer use_room_number;
+
+    public String getC_code() {
+        return c_code;
+    }
+
+    public void setC_code(String c_code) {
+        this.c_code = c_code;
+    }
 }

@@ -8,30 +8,43 @@
     </head>
     <body>
         <h4>クラスを選択</h4>
-        <from action="#" th:action="@{/subject/filter}" method="post">
-            <select name = "item" id="cbid">
-                <option th:each="item : ${clss}" th:value="${item.c_code}" th:text="${item.c_code}"></option>  
+        <form action="#" th:action="@{/subject/filter}" method="post">
+            <select name="c_code" id="cbid">
+                <option th:each="item : ${clss}" th:value="${item.c_code}" th:text="${item.c_code}"></option>
             </select>
-            <button type="submit">検索</button>
-        </from>
+            <input type="submit" name="form" value="検索" />
+        </form>
         <div th:if="${filter}">
             <hr />
-            <table>
-                <tr th:each="subject:${subject}">
-                    <td th:text="${subject.t_number}">999999</td>
-                    <td th:text="${subject.s_name}">サンプル科目</td>
-                    <td th:text="${subject.s_code}">1</td>
-                    <td th:text="${subject.s_classification}">js</td>
-                    <td th:text="${subject.use_room_number}">408</td>
-            
-                    <td>
-                        <form th:action="@{/subject/delete}" method="post">
-                            <input type="submit" name="form" value="削除" />
-                            <input type="hidden" name="t_number" th:value="${subject.t_number}"/>
-                        </form>
-                    </td>
-                </tr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>番号</th>
+                        <th>科目名</th>
+                        <th>フラグ</th>
+                        <th>クラスコード</th>
+                        <th>使用教室番号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="subject : ${filter}">
+                        <td th:text="${subject.t_number}">999999</td>
+                        <td th:text="${subject.s_name}">サンプル科目</td>
+                        <td th:text="${subject.s_code}">1</td>
+                        <td th:text="${subject.s_classification}">js</td>
+                        <td th:text="${subject.use_room_number}">408</td>
+                        <td>
+                            <form th:action="@{/subject/delete}" method="post">
+                                <input type="submit" name="form" value="削除" />
+                                <input type="hidden" name="t_number" th:value="${subject.t_number}"/>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
+        <form th:action="@{/subject/set}" method="post">
+            <input type="submit" name="form" value="科目追加" />
+        </form>
     </body>
 </html>

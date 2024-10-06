@@ -1,6 +1,5 @@
 package jp.teamd.zikanwari.controller;
 
-//import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,12 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import jp.teamd.zikanwari.bean.SubjectBean;
 import jp.teamd.zikanwari.form.SubjectForm;
 import jp.teamd.zikanwari.service.ClassService;
 import jp.teamd.zikanwari.service.SubjectService;
-import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 
@@ -25,13 +21,19 @@ public class SubjectController {
     SubjectService subjectService;
     @Autowired
     ClassService classService;
-    @Autowired
-    SubjectForm subjectForm;
 
     @ModelAttribute
     SubjectForm setUpForm(){
         return new SubjectForm();
     }
+
+    @GetMapping("/subject")
+    public String getSubject(Model model) {
+        model.addAttribute("subject", subjectService.findAll());
+        model.addAttribute("class", classService.findAll());
+        return "subjects"; // subjects.html を返す
+    }
+
 
     
     @GetMapping
@@ -54,17 +56,25 @@ public class SubjectController {
         return "redirect:/subject";
     }
 
-    @PostMapping(path = "filter")
-    public String postMethodName(@RequestParam("cbid") String code,@RequestBody Model model) {
+    @PostMapping(path = "/filter")
+    public String postMethodName(@RequestParam("c_code") String code,Model model) {
+        System.out.println("Received c_code: " + code);
         model.addAttribute("subject",subjectService.findAll());
         model.addAttribute("class",classService.findAll() );
-        List<SubjectFrom> cbitem = subjectService.findByC_code(code);
-        model.addAttribute("subject", cbitem);
+        List<SubjectForm> cbitem = subjectService.findByC_code(code);
+        model.addAttribute("filter", cbitem);
         return "redirect:/subject";
     }
     
+    @PostMapping(path = "set",params = "form")
+    String setsubject(){
+        return "subject/set";
+    }
 
-
+    @PostMapping(path = "back",params = "goToTop")
+    String goToTop(){
+        return "redirect:/subject";
+    }
 
 }
 

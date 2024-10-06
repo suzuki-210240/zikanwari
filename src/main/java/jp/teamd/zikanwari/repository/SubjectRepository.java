@@ -1,6 +1,6 @@
 package jp.teamd.zikanwari.repository;
 
-import java.util.*;
+import java.util.List;
 /*import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import org.springframework.stereotype.Repository;
@@ -10,13 +10,12 @@ import org.springframework.data.jpa.repository.Query;
 
 
 import jp.teamd.zikanwari.bean.SubjectBean;
-import java.util.List;
+
 
 
 public interface SubjectRepository extends JpaRepository<SubjectBean,Integer>{
 
     @Query("SELECT X FROM SubjectBean X")
     List<SubjectBean> findAllSubjectBeans();
-    List<SubjectBean> findByc_code(String c_code);
 
 }

@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 import jp.teamd.zikanwari.bean.SubjectBean;
 import jp.teamd.zikanwari.form.SubjectForm;
 import jp.teamd.zikanwari.repository.SubjectRepository;
+import jp.teamd.zikanwari.repository.SubjectRepositoryCustomIdImpl;
 
 @Service
 public class SubjectService {
     @Autowired
     SubjectRepository SubjectRepository;
+    @Autowired
+    SubjectRepositoryCustomIdImpl SubjectRepositoryCustomIdImpl;
 
     public SubjectForm create(SubjectForm subjectForm){
         SubjectBean subjectBean = new SubjectBean();
@@ -56,7 +59,7 @@ public class SubjectService {
         List<SubjectForm> formList = new ArrayList<SubjectForm>();
 
         if (c_code != null) {
-            beanList =  SubjectRepository.findByc_code(c_code);
+            beanList =  SubjectRepositoryCustomIdImpl.search(c_code);
         }else{
             beanList = SubjectRepository.findAll();
         }
