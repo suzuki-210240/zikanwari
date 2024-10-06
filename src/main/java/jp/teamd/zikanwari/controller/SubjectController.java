@@ -56,14 +56,22 @@ public class SubjectController {
         return "redirect:/subject";
     }
 
-    @PostMapping(path = "/filter")
-    public String postMethodName(@RequestParam("c_code") String code,Model model) {
-        System.out.println("Received c_code: " + code);
-        model.addAttribute("subject",subjectService.findAll());
-        model.addAttribute("class",classService.findAll() );
-        List<SubjectForm> cbitem = subjectService.findByC_code(code);
+    @PostMapping(path = "filter")
+    public String filter(@RequestParam("c_code") String c_code, Model model) {
+        
+        
+        // 全ての科目を取得してモデルに追加
+        model.addAttribute("subject", subjectService.findAll());
+        
+        // クラス情報も再度取得してモデルに追加
+        model.addAttribute("class", classService.findAll());
+        
+        // フィルター結果を取得
+        List<SubjectForm> cbitem = subjectService.findByC_code(c_code);
         model.addAttribute("filter", cbitem);
-        return "redirect:/subject";
+        
+        // フィルター後のリストを表示するためのテンプレートを返す
+        return "subject/list"; // または、必要なテンプレート名
     }
     
     @PostMapping(path = "set",params = "form")
@@ -71,7 +79,12 @@ public class SubjectController {
         return "subject/set";
     }
 
-    @PostMapping(path = "back",params = "goToTop")
+    @PostMapping(path = "redirect")
+    String redirect(){
+        return "redirect:/subject";
+    }
+
+    @PostMapping(path = "goToTop")
     String goToTop(){
         return "redirect:/subject";
     }

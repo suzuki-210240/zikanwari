@@ -8,15 +8,20 @@
     </head>
     <body>
         <h4>クラスを選択</h4>
-        <form action="#" th:action="@{/subject/filter}" method="post">
+        <form  th:action="@{/subject/filter}" method="post">
             <select name="c_code" id="cbid">
+                <option value="" disabled selected>クラスを選択してください</option>
                 <option th:each="item : ${clss}" th:value="${item.c_code}" th:text="${item.c_code}"></option>
             </select>
             <input type="submit" name="form" value="検索" />
         </form>
+        <form th:action="@{/subject/set}" method="post">
+            <input type="submit" name="form" value="科目追加" />
+        </form>
+        
+        <hr />
         <div th:if="${filter}">
-            <hr />
-            <table class="table">
+            <table class="table table-bordered" >
                 <thead>
                     <tr>
                         <th>番号</th>
@@ -42,9 +47,10 @@
                     </tr>
                 </tbody>
             </table>
+            <form th:action="@{/subject/redirect}" method="post">
+                <input type="submit" name="form" value="再検索" />
+            </form>
         </div>
-        <form th:action="@{/subject/set}" method="post">
-            <input type="submit" name="form" value="科目追加" />
-        </form>
+        
     </body>
 </html>

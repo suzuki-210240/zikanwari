@@ -16,7 +16,7 @@ public class SubjectService {
     @Autowired
     SubjectRepository SubjectRepository;
     @Autowired
-    SubjectRepositoryCustomIdImpl SubjectRepositoryCustomIdImpl;
+    SubjectRepositoryCustomIdImpl SubjectRepositoryCustom;
 
     public SubjectForm create(SubjectForm subjectForm){
         SubjectBean subjectBean = new SubjectBean();
@@ -59,7 +59,7 @@ public class SubjectService {
         List<SubjectForm> formList = new ArrayList<SubjectForm>();
 
         if (c_code != null) {
-            beanList =  SubjectRepositoryCustomIdImpl.search(c_code);
+            beanList =  SubjectRepositoryCustom.search(c_code);
         }else{
             beanList = SubjectRepository.findAll();
         }
