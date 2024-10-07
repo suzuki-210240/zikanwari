@@ -12,22 +12,25 @@ import jp.teamd.zikanwari.bean.SubjectBean;
 import jp.teamd.zikanwari.form.SubjectForm;
 import jp.teamd.zikanwari.repository.subjectrep.All_SubjectRepositoryCustom;
 import jp.teamd.zikanwari.repository.subjectrep.E_SubjectRepositoryCustom;
+import jp.teamd.zikanwari.repository.subjectrep.E_SubjectRepository;
 import jp.teamd.zikanwari.repository.subjectrep.L_SubjectRepositoryCustom;
 import jp.teamd.zikanwari.repository.subjectrep.SubjectRepository;
-import jp.teamd.zikanwari.repository.subjectrep.SubjectRepositoryCustomIdImpl;
+import jp.teamd.zikanwari.repository.subjectrep.SubjectRepositoryCustom;
 
 @Service
 public class SubjectService {
     @Autowired
     SubjectRepository SubjectRepository;
     @Autowired
-    SubjectRepositoryCustomIdImpl SubjectRepositoryCustom;
+    SubjectRepositoryCustom SubjectRepositoryCustom;
     @Autowired
     E_SubjectRepositoryCustom e_SubjectRepositoryCustom;
     @Autowired
+    E_SubjectRepository e_SubjectRepository;
+    @Autowired
     L_SubjectRepositoryCustom l_SubjectRepositoryCustom;
     @Autowired
-    All_SubjectRepositoryCustom All_SubjectRepositoryCustom;
+    All_SubjectRepositoryCustom all_SubjectRepositoryCustom;
     
 
     public SubjectForm create(SubjectForm subjectForm ,Integer s_code){
@@ -97,6 +100,13 @@ public class SubjectService {
             //通年
         }else if(s_classification == 1){
             //前期
+            String es_code = e_SubjectRepositoryCustom.create_code();
+            SubjectBean e_subjectBean = new SubjectBean();
+            BeanUtils.copyProperties(subjectForm, e_subjectBean);
+            e_subjectBean.setS_code(s_code);
+            e_SubjectRepository.save(e_subjectBean);
+            return subjectForm;
+
         }else if(s_classification == 2){
             //後期
         }
