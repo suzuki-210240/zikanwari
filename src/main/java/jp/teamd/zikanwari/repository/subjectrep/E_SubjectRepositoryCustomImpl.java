@@ -20,4 +20,15 @@ public class E_SubjectRepositoryCustomImpl implements E_SubjectRepositoryCustom 
         query.setParameter("es_code", es_code); // パラメータを設定
         return query.getResultList(); // 結果を返す
     }
+
+    @Override
+    public String create_code() {
+        // JPQLを使ってクエリを実行
+        String ret = "e";
+        String jpql = "SELECT MAX(s.s_number) FROM E_SubjectBean s"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        List<Integer> resultList = query.getResultList(); // パラメータを設定
+        ret = ret + String.valueOf(resultList.get(0) + 1);
+        return ret; // 結果を返す
+    }
 }

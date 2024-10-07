@@ -20,6 +20,7 @@ public class L_SubjectRepositoryCustomImpl implements L_SubjectRepositoryCustom 
     @Override
     public List<L_SubjectBean> set(String es_code, Integer sub_code, Integer weak_frame) {
         // JPQLを使ってクエリを実行
+        
         String jpql = "SELECT s FROM L_SubjectBean s WHERE s.es_code = :es_code"; // クラス名を使用
         TypedQuery<L_SubjectBean> query = entityManager.createQuery(jpql, L_SubjectBean.class);
         query.setParameter("es_code", es_code); // パラメータを設定
