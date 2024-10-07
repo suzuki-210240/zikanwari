@@ -14,7 +14,7 @@ public class ClassBean {
     @Id
     private String c_code;
     private Integer c_year;
-    private String c_class;
+    private Integer c_class;
     @Column(nullable = false)
     private String d_code;
     private String onlineday;
