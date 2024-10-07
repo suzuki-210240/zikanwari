@@ -50,7 +50,7 @@ public class SubjectController {
     String create(SubjectForm form,Model model,String s_name,String c_code,Integer t_number,Integer s_classification,Integer use_room_number){
         model.addAttribute("subject",subjectService.findAll());
         Integer code = subjectService.getCode(c_code);
-        
+        subjectService.create(form, code);
         subjectService.setSubject(code, s_name, c_code, t_number, s_classification, use_room_number);
         return "redirect:/subject/set";
     }

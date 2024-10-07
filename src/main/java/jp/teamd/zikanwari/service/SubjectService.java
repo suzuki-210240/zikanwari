@@ -30,9 +30,10 @@ public class SubjectService {
     All_SubjectRepositoryCustom All_SubjectRepositoryCustom;
     
 
-    public SubjectForm create(SubjectForm subjectForm){
+    public SubjectForm create(SubjectForm subjectForm ,Integer s_code){
         SubjectBean subjectBean = new SubjectBean();
         BeanUtils.copyProperties(subjectForm, subjectBean);
+        subjectBean.setS_code(s_code);
         SubjectRepository.save(subjectBean);
         return subjectForm;
     }
@@ -91,7 +92,7 @@ public class SubjectService {
 
     @Transactional
     public void setSubject(Integer s_code,String s_name,String c_code,Integer t_number,Integer s_classification,Integer use_room_number){
-        
+
         if(s_classification == 0){
             //通年
         }else if(s_classification == 1){

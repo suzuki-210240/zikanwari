@@ -18,7 +18,7 @@ import jp.teamd.zikanwari.service.KomaService;
 @RequestMapping("pages")
 public class KomaController {
     @Autowired
-    KomaService bookService;
+    KomaService komaService;
 
     @ModelAttribute
     KomaForm setUpForm(){
@@ -27,32 +27,32 @@ public class KomaController {
 
     @GetMapping
     String list(Model model){
-        model.addAttribute("pages",bookService.findAll());
+        model.addAttribute("pages",komaService.findAll());
         return "pages/list";
     }
 
     @PostMapping(path="create")
     String create(KomaForm form,Model mode){
-        bookService.create(form);
+        komaService.create(form);
         return "redirect:/pages";
     }
 
     @PostMapping(path = "edit",params = "form")
     String editForm(@RequestParam String season,Integer d_code,Integer s_code,String dayofweak,KomaForm form){
-        KomaForm bookForm = bookService.findOne(season,d_code,s_code,dayofweak);
+        KomaForm bookForm = komaService.findOne(season,d_code,s_code,dayofweak);
         BeanUtils.copyProperties(bookForm, form);
         return "pages/edit";
     }
 
     @PostMapping(path = "edit")
     String edit(@RequestParam Integer id,KomaForm form){
-        bookService.update(form);
+        komaService.update(form);
         return "redirect:/pages";
     }
 
     @PostMapping(path = "delete")
     String delete(@RequestParam String season,Integer d_code,Integer s_code,String dayofweak){
-        bookService.delete(season,d_code,s_code,dayofweak);
+        komaService.delete(season,d_code,s_code,dayofweak);
         return "redirect:/pages";
     }
 

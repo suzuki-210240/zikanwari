@@ -12,7 +12,11 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 public class All_SubjectBean {
     @Id
-    private String es_code;
+    private String alls_code;
     private Integer sub_code;
     private Integer weak_frame;
+
+    public void set_es_code(String alls_code){
+        this.alls_code = alls_code;
+    }
 }
