@@ -44,8 +44,8 @@ public class SubjectController {
     }
 
     @PostMapping(path="create")
-    String create(SubjectForm form,Model mode){
-        subjectService.create(form);
+    String create(SubjectForm form,Model mode ){
+        
         return "redirect:/subject";
     }
 

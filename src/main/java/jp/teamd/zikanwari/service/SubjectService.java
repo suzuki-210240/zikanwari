@@ -2,14 +2,19 @@ package jp.teamd.zikanwari.service;
 
 import java.util.*;
 
+//import org.hibernate.mapping.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import jp.teamd.zikanwari.bean.SubjectBean;
 import jp.teamd.zikanwari.form.SubjectForm;
-import jp.teamd.zikanwari.repository.SubjectRepository;
-import jp.teamd.zikanwari.repository.SubjectRepositoryCustomIdImpl;
+import jp.teamd.zikanwari.repository.subjectrep.All_SubjectRepositoryCustom;
+import jp.teamd.zikanwari.repository.subjectrep.E_SubjectRepositoryCustom;
+import jp.teamd.zikanwari.repository.subjectrep.L_SubjectRepositoryCustom;
+import jp.teamd.zikanwari.repository.subjectrep.SubjectRepository;
+import jp.teamd.zikanwari.repository.subjectrep.SubjectRepositoryCustomIdImpl;
 
 @Service
 public class SubjectService {
@@ -17,6 +22,13 @@ public class SubjectService {
     SubjectRepository SubjectRepository;
     @Autowired
     SubjectRepositoryCustomIdImpl SubjectRepositoryCustom;
+    @Autowired
+    E_SubjectRepositoryCustom e_SubjectRepositoryCustom;
+    @Autowired
+    L_SubjectRepositoryCustom l_SubjectRepositoryCustom;
+    @Autowired
+    All_SubjectRepositoryCustom All_SubjectRepositoryCustom;
+    
 
     public SubjectForm create(SubjectForm subjectForm){
         SubjectBean subjectBean = new SubjectBean();
@@ -71,5 +83,10 @@ public class SubjectService {
             formList.add(subjectForm);
         }
         return formList;
+    }
+
+    @Transactional
+    public void setSubject(){
+        
     }
 }

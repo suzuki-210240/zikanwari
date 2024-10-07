@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari.repository;
+package jp.teamd.zikanwari.repository.subjectrep;
 
 import java.util.List;
 
