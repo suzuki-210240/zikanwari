@@ -20,4 +20,9 @@ public class E_SubjectBean {
     public void set_es_code(String es_code){
         this.es_code = es_code;
     }
+
+    public void set_all(Integer sub_code,Integer weak_frame){
+        this.sub_code = sub_code;
+        this.weak_frame = weak_frame;
+    }
 }

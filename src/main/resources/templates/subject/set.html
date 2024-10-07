@@ -14,6 +14,7 @@
                 <td>クラスコード:</td><td><input type="text" name="c_code" th:field="*{c_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('c_code')}"th:errors="*{c_code}" class="error-message">error!</span></td></tr>
                 <tr><td>担当教員番号:</td><td><input type="text" name="t_number"  th:field="*{t_number}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('t_number')}"th:errors="*{t_number}" class="error-message">error!</span></td></tr>
                 <tr><td>履修学期:</td><td><input type="text" name="s_classification" th:field="*{s_classification}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('s_classification')}"th:errors="*{s_classification}" class="error-message">error!</span></td></tr>
+                <tr><td>1週間の科目数:</td><td><input type="text" name="weak_frame" th:field="*{weak_frame}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('weak_frame')}"th:errors="*{weak_frame}" class="error-message">error!</span></td></tr>
                 <tr><td>使用教室番号:</td><td><input type="text" name="use_room_number"  th:field="*{use_room_number}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('use_room_number')}"th:errors="*{use_room_number}" class="error-message">error!</span></td></tr>
             </table>
             <input type="submit" value="作成"/> 

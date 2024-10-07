@@ -26,4 +26,14 @@ public class SubjectBean {
     public void setC_code(String c_code) {
         this.c_code = c_code;
     }
+    
+    public void set_all(Integer s_code,String s_name,String c_code,Integer t_number,Integer s_classification,Integer use_room_number){
+        this.s_code = s_code;
+        this.s_name = s_name;
+        this.c_code = c_code;
+        this.t_number = t_number;
+        this.s_classification = s_classification;
+        this.use_room_number = use_room_number;
+    }
+
 }
