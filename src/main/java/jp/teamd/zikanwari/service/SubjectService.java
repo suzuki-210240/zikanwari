@@ -99,6 +99,7 @@ public class SubjectService {
             //前期
         }else if(s_classification == 2){
             //後期
+            String ls_code = l_SubjectRepositoryCustom.create_code();
         }
     }
 }
