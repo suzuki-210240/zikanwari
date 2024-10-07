@@ -12,6 +12,11 @@ public class L_SubjectRepositoryCustomImpl implements L_SubjectRepositoryCustom 
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    public L_SubjectRepositoryCustomImpl() {
+        // 特に処理は必要ない場合
+    }
+
     @Override
     public List<L_SubjectBean> set(String es_code, Integer sub_code, Integer weak_frame) {
         // JPQLを使ってクエリを実行

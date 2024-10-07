@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jp.teamd.zikanwari.form.SubjectForm;
+import jp.teamd.zikanwari.form.E_SubjectForm;
+import jp.teamd.zikanwari.form.L_SubjectForm;
+import jp.teamd.zikanwari.form.All_SubjectForm;
 import jp.teamd.zikanwari.service.ClassService;
 import jp.teamd.zikanwari.service.SubjectService;
 import java.util.List;
@@ -44,9 +47,12 @@ public class SubjectController {
     }
 
     @PostMapping(path="create")
-    String create(SubjectForm form,Model mode ){
+    String create(SubjectForm form,Model model,String s_name,String c_code,Integer t_number,Integer s_classification,Integer use_room_number){
+        model.addAttribute("subject",subjectService.findAll());
+        Integer code = subjectService.getCode(c_code);
         
-        return "redirect:/subject";
+        subjectService.setSubject(code, s_name, c_code, t_number, s_classification, use_room_number);
+        return "redirect:/subject/set";
     }
 
 

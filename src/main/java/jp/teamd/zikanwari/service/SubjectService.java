@@ -85,8 +85,19 @@ public class SubjectService {
         return formList;
     }
 
+    public Integer getCode(String c_code){
+        return SubjectRepositoryCustom.getcode(c_code);
+    }
+
     @Transactional
-    public void setSubject(){
+    public void setSubject(Integer s_code,String s_name,String c_code,Integer t_number,Integer s_classification,Integer use_room_number){
         
+        if(s_classification == 0){
+            //通年
+        }else if(s_classification == 1){
+            //前期
+        }else if(s_classification == 2){
+            //後期
+        }
     }
 }

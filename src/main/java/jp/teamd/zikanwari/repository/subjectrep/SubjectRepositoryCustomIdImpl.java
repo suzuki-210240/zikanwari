@@ -32,13 +32,20 @@ public class SubjectRepositoryCustomIdImpl implements SubjectRepositoryCustom {
     List<Integer> resultList = query.getResultList(); // 結果のリストを取得
     Integer ret = 0;
     if(resultList.size() == 0){
-        jpql = "SELECT c.class FROM class c WHERE c.c_code = :c_code"; // クラス名を使用
+        jpql = "SELECT c.c_class FROM class c WHERE c.c_code = :c_code"; // クラス名を使用
         query = entityManager.createQuery(jpql, Integer.class);
         query.setParameter("c_code", c_code);
-        List<Integer> 
+        List<Integer> codeList = query.getResultList();
+        jpql = "SELECT c.c_year FROM class c WHERE c.c_code = :c_code"; // クラス名を使用
+        query = entityManager.createQuery(jpql, Integer.class);
+        query.setParameter("c_code", c_code);
+        List<Integer> yearList = query.getResultList();
+        ret = (codeList.get(0) * 10000) + (yearList.get(0) * 100);
+
     }else{
        ret = resultList.get(0); 
     }
+    
     return ret; 
 }
 }
