@@ -17,7 +17,6 @@ public class KomaService {
     KomaRepository komaRepository;
 
     public KomaForm create(KomaForm komaForm){
-        //komaForm.setId(komaRepository.getBookId());
         KomaBean komaBean = new KomaBean();
         BeanUtils.copyProperties(komaForm, komaBean);
         komaRepository.save(komaBean);
@@ -35,6 +34,7 @@ public class KomaService {
         KomaId komaId = new KomaId(season,d_code,s_code,dayofweak);
         komaRepository.deleteById(komaId);
     }
+
     public List<KomaForm> findAll(){
         List<KomaBean> beanList = komaRepository.findAll();
         List<KomaForm> formList = new ArrayList<KomaForm>();

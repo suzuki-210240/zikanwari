@@ -6,6 +6,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jp.teamd.zikanwari.bean.KomaBean;
 import org.springframework.stereotype.Component;
+import jp.teamd.zikanwari.bean.OnlineBean;
+import jp.teamd.zikanwari.repository.OnlineRepository;
 
 @Component
 public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
@@ -51,5 +53,52 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
         
         Integer room_num = query.getSingleResult();
         return room_num; 
+    }
+
+    @Override
+    public boolean check_room(String season,Integer d_code,String dayofweak,Integer r_number) {
+    // JPQLを使ってクエリを実行
+        boolean ret = true;
+        String jpql = "SELECT s.s_code FROM KomaBean s WHERE s.season= :season AND s.d_code = :d_code AND s.dayofweak = :dayofweak AND s.r_number = :r_number"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        query.setParameter("sesason", season);
+        query.setParameter("d_code", d_code);
+        query.setParameter("dayofweak", dayofweak);
+        query.setParameter("r_number", r_number);
+        
+        Integer data = query.getSingleResult();
+        if(data != null){
+            ret = false;
+        }
+        return ret; 
+    }
+
+    @Override
+    public boolean check_teacher(String season,Integer d_code,String dayofweak,Integer r_number) {
+    // JPQLを使ってクエリを実行
+        boolean ret = true;
+        String jpql = "SELECT s.t_number FROM KomaBean s WHERE s.season= :season AND s.d_code = :d_code AND s.dayofweak = :dayofweak AND s.r_number = :r_number"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        query.setParameter("sesason", season);
+        query.setParameter("d_code", d_code);
+        query.setParameter("dayofweak", dayofweak);
+        query.setParameter("r_number", r_number);
+        
+        Integer data = query.getSingleResult();
+        if(data != null){
+            ret = false;
+        }
+        return ret; 
+    }
+
+    @Override
+    public List<OnlineBean> set_online() {
+    // JPQLを使ってクエリを実行
+        List<OnlineBean> onlineBeans;
+        boolean ret = true;
+        String jpql = "SELECT s.s_code FROM KomaBean s WHERE s.season= :season AND s.d_code = :d_code AND s.dayofweak = :dayofweak AND s.r_number = :r_number"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        
+        return onlineBeans; 
     }
 }
