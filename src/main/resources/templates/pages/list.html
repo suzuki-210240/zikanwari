@@ -19,10 +19,11 @@
         <hr />
         <table>
             <tr th:each="koma:${pages}">
-                <td th:text="${koma.season}">タイトルA</td>
-                <td th:text="${koma.d_code}">著者A</td>
-                <td th:text="${koma.s_code}">出版社A</td>
+                <td th:text="${koma.season}">受講時期</td>
+                <td th:text="${koma.d_code}">コマ番号</td>
+                <td th:text="${koma.s_code}">科目</td>
                 <td th:text="${koma.dayofweak}">曜日</td>
+                <td th:text="${koma.r_number}">111</td>
                 <td>
                     <form th:action="@{/pages/edit}" method="post">
                         <input type="submit" name="form" value="編集" />

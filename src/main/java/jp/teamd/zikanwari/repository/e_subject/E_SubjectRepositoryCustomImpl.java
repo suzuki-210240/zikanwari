@@ -6,7 +6,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import jp.teamd.zikanwari.bean.E_SubjectBean;
-
 @Component
 public class E_SubjectRepositoryCustomImpl implements E_SubjectRepositoryCustom {
     @PersistenceContext
