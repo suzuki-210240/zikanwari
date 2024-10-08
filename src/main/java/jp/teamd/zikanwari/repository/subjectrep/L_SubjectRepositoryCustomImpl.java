@@ -37,4 +37,13 @@ public class L_SubjectRepositoryCustomImpl implements L_SubjectRepositoryCustom 
         ret = ret + String.valueOf(resultList.get(0) + 1);
         return ret; // 結果を返す
     }
+
+    @Override
+    public Integer get_number(){
+        String jpql = "SELECT MAX(s.s_number) FROM L_SubjectBean s"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        Integer resultList = query.getSingleResult(); // パラメータを設定
+        Integer ret = resultList + 1;
+        return ret; // 結果を返す
+    }
 }

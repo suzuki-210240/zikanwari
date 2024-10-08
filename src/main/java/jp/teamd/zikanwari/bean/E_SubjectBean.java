@@ -15,6 +15,7 @@ public class E_SubjectBean {
     private String es_code;
     private Integer sub_code;
     private Integer weak_frame;
+    private Integer s_number;
 
     
     public void set_es_code(String es_code){

@@ -40,7 +40,12 @@ public class SubjectService {
 
     public void create(Integer s_code,String s_name,String c_code,Integer t_number,Integer s_classification,Integer use_room_number){
         SubjectBean subjectBean = new SubjectBean();
-        subjectBean.set_all(s_code, s_name, c_code, t_number, s_classification, use_room_number);
+        subjectBean.setS_code(s_code);
+        subjectBean.setS_name(s_name);
+        subjectBean.setC_code(c_code);
+        subjectBean.setT_number(t_number);
+        subjectBean.setS_classification(s_classification);
+        subjectBean.setUse_room_number(use_room_number);
         SubjectRepository.save(subjectBean);
     }
 
@@ -104,20 +109,26 @@ public class SubjectService {
         }else if(s_classification == 1){
             //前期
             String es_code = e_SubjectRepositoryCustom.create_code();
+            Integer s_number = e_SubjectRepositoryCustom.get_number();
             E_SubjectBean e_subjectBean = new E_SubjectBean();
             
-            e_subjectBean.set_es_code(es_code);
-            e_subjectBean.set_all(s_code, weak_frame);
+            e_subjectBean.setEs_code(es_code);
+            e_subjectBean.setSub_code(s_code);
+            e_subjectBean.setWeak_frame(weak_frame);
+            e_subjectBean.setS_number(s_number);
             e_SubjectRepository.save(e_subjectBean);
 
         }else if(s_classification == 2){
             //後期
             String ls_code = l_SubjectRepositoryCustom.create_code();
-            L_SubjectBean l_SubjectBean = new L_SubjectBean();
+            Integer s_number = l_SubjectRepositoryCustom.get_number();
+            L_SubjectBean l_subjectBean = new L_SubjectBean();
 
-            l_SubjectBean.setLs_code(ls_code);
-            l_SubjectBean.set_all(s_code, weak_frame);
-            l_SubjectRepository.save(l_SubjectBean);
+            l_subjectBean.setLs_code(ls_code);
+            l_subjectBean.setSub_code(s_code);
+            l_subjectBean.setWeak_frame(weak_frame);
+            l_subjectBean.setS_number(s_number);
+            l_SubjectRepository.save(l_subjectBean);
         }
     }
 }

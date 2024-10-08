@@ -25,27 +25,31 @@ public class SubjectRepositoryCustomIdImpl implements SubjectRepositoryCustom {
     @Override
     public Integer getcode(String c_code) {
     // JPQLを使ってクエリを実行
-    String jpql = "SELECT MAX(s.s_code) FROM SubjectBean s WHERE s.c_code = :c_code"; // クラス名を使用
-    TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
-    query.setParameter("c_code", c_code);
-    
-    List<Integer> resultList = query.getResultList(); // 結果のリストを取得
-    Integer ret = 0;
-    if(resultList.size() == 0){
-        jpql = "SELECT c.c_class FROM class c WHERE c.c_code = :c_code"; // クラス名を使用
-        query = entityManager.createQuery(jpql, Integer.class);
+        String jpql = "SELECT MAX(s.s_code) FROM SubjectBean s WHERE s.c_code = :c_code"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
         query.setParameter("c_code", c_code);
-        List<Integer> codeList = query.getResultList();
-        jpql = "SELECT c.c_year FROM class c WHERE c.c_code = :c_code"; // クラス名を使用
-        query = entityManager.createQuery(jpql, Integer.class);
-        query.setParameter("c_code", c_code);
-        List<Integer> yearList = query.getResultList();
-        ret = (codeList.get(0) * 10000) + (yearList.get(0) * 100);
+        
+        Integer ret = query.getSingleResult(); // 結果のリストを取得
+        
+        if(ret == null){
+            jpql = "SELECT c.c_class FROM ClassBean c WHERE c.c_code = :c_code"; // クラス名を使用
+            query = entityManager.createQuery(jpql, Integer.class);
+            query.setParameter("c_code", c_code);
+            List<Integer> codeList = query.getResultList();
+            jpql = "SELECT c.c_year FROM ClassBean c WHERE c.c_code = :c_code"; // クラス名を使用
+            query = entityManager.createQuery(jpql, Integer.class);
+            query.setParameter("c_code", c_code);
+            List<Integer> yearList = query.getResultList();
+            if (!codeList.isEmpty() && codeList.get(0) != null && !yearList.isEmpty() && yearList.get(0) != null) {
+                ret = 0;
+            } else {
+                ret = (codeList.get(0) * 10000) + (yearList.get(0) * 100); // クラス情報がない場合
+            }
 
-    }else{
-       ret = resultList.get(0); 
-    }
+        }else{
+            //ret = resultList.get(0); 
+        }
     
-    return ret; 
-}
+        return ret; 
+    }
 }

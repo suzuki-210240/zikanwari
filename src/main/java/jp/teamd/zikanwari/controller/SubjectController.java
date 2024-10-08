@@ -45,7 +45,7 @@ public class SubjectController {
 
     @PostMapping(path="create")
     String create(Model model,String s_name,String c_code,Integer t_number,Integer s_classification,Integer weak_frame,Integer use_room_number){
-        model.addAttribute("subject",subjectService.findAll());
+        
         Integer code = subjectService.getCode(c_code);
         subjectService.create(code, s_name, c_code, t_number, s_classification, use_room_number);
         subjectService.setSubject(code, s_name, c_code, t_number, s_classification,weak_frame,use_room_number);
