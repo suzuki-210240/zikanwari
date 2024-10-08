@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari.repository;
+package jp.teamd.zikanwari.repository.koma;
 
 import java.util.*;
 import org.springframework.data.jpa.repository.JpaRepository;

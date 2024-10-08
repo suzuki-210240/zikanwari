@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import jp.teamd.zikanwari.KomaId;
 import jp.teamd.zikanwari.bean.KomaBean;
 import jp.teamd.zikanwari.form.KomaForm;
-import jp.teamd.zikanwari.repository.KomaRepository;
+import jp.teamd.zikanwari.repository.koma.KomaRepository;
 
 @Service
 public class KomaService {

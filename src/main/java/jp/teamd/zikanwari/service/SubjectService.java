@@ -114,6 +114,7 @@ public class SubjectService {
             e_subjectBean.setSub_code(s_code);
             e_subjectBean.setWeak_frame(weak_frame);
             e_subjectBean.setS_number(s_number);
+            e_subjectBean.setSetflg(weak_frame);
             e_SubjectRepository.save(e_subjectBean);
 
         }else if(s_classification == 2){
@@ -126,6 +127,7 @@ public class SubjectService {
             l_subjectBean.setSub_code(s_code);
             l_subjectBean.setWeak_frame(weak_frame);
             l_subjectBean.setS_number(s_number);
+            l_subjectBean.setSetflg(weak_frame);
             l_SubjectRepository.save(l_subjectBean);
         }
     }

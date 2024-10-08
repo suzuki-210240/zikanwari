@@ -15,7 +15,7 @@ import jp.teamd.zikanwari.service.KomaService;
 
 
 @Controller
-@RequestMapping("pages")
+@RequestMapping("koma")
 public class KomaController {
     @Autowired
     KomaService komaService;
@@ -27,38 +27,38 @@ public class KomaController {
 
     @GetMapping
     String list(Model model){
-        model.addAttribute("pages",komaService.findAll());
-        return "pages/list";
+        model.addAttribute("koma",komaService.findAll());
+        return "koma/list";
     }
 
     @PostMapping(path="create")
     String create(KomaForm form,Model mode){
         komaService.create(form);
-        return "redirect:/pages";
+        return "redirect:/koma";
     }
 
     @PostMapping(path = "edit",params = "form")
     String editForm(@RequestParam String season,Integer d_code,Integer s_code,String dayofweak,KomaForm form){
         KomaForm bookForm = komaService.findOne(season,d_code,s_code,dayofweak);
         BeanUtils.copyProperties(bookForm, form);
-        return "pages/edit";
+        return "koma/edit";
     }
 
     @PostMapping(path = "edit")
     String edit(@RequestParam Integer id,KomaForm form){
         komaService.update(form);
-        return "redirect:/pages";
+        return "redirect:/koma";
     }
 
     @PostMapping(path = "delete")
     String delete(@RequestParam String season,Integer d_code,Integer s_code,String dayofweak){
         komaService.delete(season,d_code,s_code,dayofweak);
-        return "redirect:/pages";
+        return "redirect:/koma";
     }
 
     @PostMapping(path = "edit",params = "goToTop")
     String goToTop(){
-        return "redirect:/pages";
+        return "redirect:/koma";
     }
 }
 

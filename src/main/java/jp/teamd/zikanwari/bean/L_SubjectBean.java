@@ -16,6 +16,7 @@ public class L_SubjectBean {
     private Integer sub_code;
     private Integer weak_frame;
     private Integer s_number;
+    private Integer setflg;
 
     
     public void set_es_code(String ls_code){

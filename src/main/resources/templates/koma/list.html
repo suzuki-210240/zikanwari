@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <title>時間割一覧画面</title>
+        <title>時間割追加画面</title>
         <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     </head>
@@ -14,7 +14,7 @@
                 <tr><td>科目コード:</td><td><input type="text" name="s_code" th:field="*{s_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('s_code')}"th:errors="*{s_code}" class="error-message">error!</span></td></tr>
                 <tr><td>曜日:</td><td><input type="text" name="dayofweak" th:field="*{dayofweak}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('dayofweak')}"th:errors="*{dayofweak}" class="error-message">error!</span></td></tr>
             </table>
-            <input type="submit" value="作成"/> 
+            <input type="submit" value="追加"/> 
         </form>
         <hr />
         <table>
