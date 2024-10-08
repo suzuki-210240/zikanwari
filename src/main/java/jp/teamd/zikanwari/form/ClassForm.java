@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 public class ClassForm {
     private String c_code;
     private Integer c_year;
-    private String c_class = "9";
     private String d_code;
     private String onlineday;
     private Integer btime;

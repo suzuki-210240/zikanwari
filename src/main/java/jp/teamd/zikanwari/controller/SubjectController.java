@@ -27,14 +27,6 @@ public class SubjectController {
         return new SubjectForm();
     }
 
-    @GetMapping("/subject")
-    public String getSubject(Model model) {
-        model.addAttribute("subject", subjectService.findAll());
-        model.addAttribute("class", classService.findAll());
-        return "subjects"; // subjects.html を返す
-    }
-
-
     
     @GetMapping
     String list(Model model){
@@ -49,7 +41,7 @@ public class SubjectController {
         Integer code = subjectService.getCode(c_code);
         subjectService.create(code, s_name, c_code, t_number, s_classification, use_room_number);
         subjectService.setSubject(code, s_name, c_code, t_number, s_classification,weak_frame,use_room_number);
-        return "redirect:/subject/set";
+        return "redirect:/subject";
     }
 
 
@@ -77,7 +69,7 @@ public class SubjectController {
         return "subject/list"; // または、必要なテンプレート名
     }
     
-    @PostMapping(path = "set",params = "form")
+    @PostMapping(path = "set")
     String setsubject(){
         return "subject/set";
     }

@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari.repository.subjectrep;
+package jp.teamd.zikanwari.repository.subject;
 
 import java.util.List;
 import jakarta.persistence.EntityManager;
@@ -41,13 +41,13 @@ public class SubjectRepositoryCustomIdImpl implements SubjectRepositoryCustom {
             query.setParameter("c_code", c_code);
             List<Integer> yearList = query.getResultList();
             if (!codeList.isEmpty() && codeList.get(0) != null && !yearList.isEmpty() && yearList.get(0) != null) {
-                ret = 0;
+                ret = (codeList.get(0) * 10000) + (yearList.get(0) * 100);
             } else {
-                ret = (codeList.get(0) * 10000) + (yearList.get(0) * 100); // クラス情報がない場合
+                ret = 1; // クラス情報がない場合
             }
 
         }else{
-            //ret = resultList.get(0); 
+            ret = ret + 1; 
         }
     
         return ret; 

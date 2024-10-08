@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari.repository.subjectrep;
+package jp.teamd.zikanwari.repository.l_subject;
 
 import java.util.List;
 import jakarta.persistence.EntityManager;

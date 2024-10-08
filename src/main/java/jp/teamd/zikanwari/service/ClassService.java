@@ -8,16 +8,21 @@ import org.springframework.stereotype.Service;
 
 import jp.teamd.zikanwari.bean.ClassBean;
 import jp.teamd.zikanwari.form.ClassForm;
-import jp.teamd.zikanwari.repository.ClassRepository;
+import jp.teamd.zikanwari.repository.clss.ClassRepository;
+import jp.teamd.zikanwari.repository.clss.ClassRepositoryCustom;
 
 @Service
 public class ClassService {
     @Autowired
     ClassRepository ClassRepository;
+    @Autowired
+    ClassRepositoryCustom classRepositoryCustom;
 
     public ClassForm create(ClassForm classForm){
         ClassBean classBean = new ClassBean();
         BeanUtils.copyProperties(classForm, classBean);
+        Integer c_class = classRepositoryCustom.getcode();
+        classBean.setC_class(c_class);
         ClassRepository.save(classBean);
         return classForm;
     }

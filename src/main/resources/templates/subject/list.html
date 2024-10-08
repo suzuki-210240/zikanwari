@@ -27,15 +27,17 @@
                         <th>番号</th>
                         <th>科目名</th>
                         <th>クラスコード</th>
+                        <th>担当教員名</th>
                         <th>フラグ</th>
                         <th>使用教室番号</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="subject : ${filter}">
-                        <td th:text="${subject.t_number}">999999</td>
-                        <td th:text="${subject.s_name}">サンプル科目</td>
                         <td th:text="${subject.s_code}">1</td>
+                        <td th:text="${subject.s_name}">サンプル科目</td>
+                        <td th:text="${subject.c_code}">999999</td>
+                        <td th:text="${subject.t_number}">999999</td>
                         <td th:text="${subject.s_classification}">js</td>
                         <td th:text="${subject.use_room_number}">408</td>
                         <td>

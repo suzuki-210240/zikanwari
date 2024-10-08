@@ -23,7 +23,6 @@
             <tr>
                 <th>クラスコード</th>
                 <th>学年</th>
-                <th>学科番号（自動設定）</th>
                 <th>学科コード</th>
                 <th>オンライン曜日</th>
                 <th>休憩時間</th>
@@ -31,7 +30,6 @@
             <tr th:each="class:${class}">
                 <td th:text="${class.c_code}">999999</td>
                 <td th:text="${class.c_year}">411</td>
-                <td th:text="${class.c_class}">411</td>
                 <td th:text="${class.d_code}">111</td>
                 <td th:text="${class.onlineday}">1111</td>
                 <td th:text="${class.btime}">1111</td>

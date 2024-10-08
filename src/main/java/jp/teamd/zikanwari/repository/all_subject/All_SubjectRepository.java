@@ -1,4 +1,4 @@
-package jp.teamd.zikanwari.repository.subjectrep;
+package jp.teamd.zikanwari.repository.all_subject;
 
 import java.util.List;
 /*import java.util.concurrent.ConcurrentHashMap;
@@ -9,13 +9,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 
-import jp.teamd.zikanwari.bean.L_SubjectBean;
+import jp.teamd.zikanwari.bean.All_SubjectBean;
 
 
 
-public interface L_SubjectRepository extends JpaRepository<L_SubjectBean,String>{
+public interface All_SubjectRepository extends JpaRepository<All_SubjectBean,String>{
 
-    @Query("SELECT X FROM L_SubjectBean X")
-    List<L_SubjectBean> findAllSubjectBeans();
+    @Query("SELECT X FROM All_SubjectBean X")
+    List<All_SubjectBean> findAllSubjectBeans();
 
 }

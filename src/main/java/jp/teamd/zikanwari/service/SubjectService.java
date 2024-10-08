@@ -7,18 +7,17 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import jp.teamd.zikanwari.bean.SubjectBean;
 import jp.teamd.zikanwari.bean.E_SubjectBean;
 import jp.teamd.zikanwari.bean.L_SubjectBean;
 import jp.teamd.zikanwari.form.SubjectForm;
-import jp.teamd.zikanwari.repository.subjectrep.All_SubjectRepositoryCustom;
-import jp.teamd.zikanwari.repository.subjectrep.E_SubjectRepositoryCustom;
-import jp.teamd.zikanwari.repository.subjectrep.E_SubjectRepository;
-import jp.teamd.zikanwari.repository.subjectrep.L_SubjectRepositoryCustom;
-import jp.teamd.zikanwari.repository.subjectrep.L_SubjectRepository;
-import jp.teamd.zikanwari.repository.subjectrep.SubjectRepository;
-import jp.teamd.zikanwari.repository.subjectrep.SubjectRepositoryCustom;
+import jp.teamd.zikanwari.repository.all_subject.All_SubjectRepositoryCustom;
+import jp.teamd.zikanwari.repository.e_subject.E_SubjectRepository;
+import jp.teamd.zikanwari.repository.e_subject.E_SubjectRepositoryCustom;
+import jp.teamd.zikanwari.repository.l_subject.L_SubjectRepository;
+import jp.teamd.zikanwari.repository.l_subject.L_SubjectRepositoryCustom;
+import jp.teamd.zikanwari.repository.subject.SubjectRepository;
+import jp.teamd.zikanwari.repository.subject.SubjectRepositoryCustom;
 
 @Service
 public class SubjectService {
@@ -101,7 +100,6 @@ public class SubjectService {
         return SubjectRepositoryCustom.getcode(c_code);
     }
 
-    @Transactional
     public void setSubject(Integer s_code,String s_name,String c_code,Integer t_number,Integer s_classification,Integer weak_frame,Integer use_room_number){
 
         if(s_classification == 0){
