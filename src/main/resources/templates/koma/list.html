@@ -16,6 +16,9 @@
             </table>
             <input type="submit" value="追加"/> 
         </form>
+        <div th:if="${message}" class="alert alert-warning" role="alert">
+            <p th:text="${message}"></p>
+        </div>
         <hr />
         <table>
             <tr th:each="koma:${pages}">

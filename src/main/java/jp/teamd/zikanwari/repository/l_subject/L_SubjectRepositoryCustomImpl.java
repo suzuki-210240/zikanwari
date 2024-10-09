@@ -46,4 +46,9 @@ public class L_SubjectRepositoryCustomImpl implements L_SubjectRepositoryCustom 
         Integer ret = resultList + 1;
         return ret; // 結果を返す
     }
+
+    @Override
+    public Integer get_setflg(Integer s_code){
+        String jpql = 
+    }
 }

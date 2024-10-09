@@ -29,16 +29,16 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
     // JPQLを使ってクエリを実行
         
         String jpql = "SELECT s.c_code FROM SubjectBean s WHERE s.s_code = :s_code"; // クラス名を使用
-        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
         query.setParameter("s_code", s_code);
         
-        Integer c_code = query.getSingleResult(); // 結果のリストを取得
+        String c_code = query.getSingleResult(); // 結果のリストを取得
 
         jpql = "SELECT s.bitme FROM ClassBean s WHERE s.c_code = :c_code";
-        query = entityManager.createQuery(jpql, Integer.class);
+        TypedQuery<Integer>query2 = entityManager.createQuery(jpql, Integer.class);
         query.setParameter("c_code", c_code);
 
-        Integer ret = query.getSingleResult();
+        Integer ret = query2.getSingleResult();
     
         return ret; 
     }
@@ -92,9 +92,9 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
     }
 
     @Override
-    public List<OnlineBean> set_online() {
+    public OnlineBean set_online() {
     // JPQLを使ってクエリを実行
-        List<OnlineBean> onlineBeans;
+        OnlineBean onlineBeans = new OnlineBean();
         boolean ret = true;
         String jpql = "SELECT s.s_code FROM KomaBean s WHERE s.season= :season AND s.d_code = :d_code AND s.dayofweak = :dayofweak AND s.r_number = :r_number"; // クラス名を使用
         TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
