@@ -68,11 +68,21 @@
             <form action="#" method="get" th:action="@{/koma/list}" >
                 <button type="submit">時間割作成する</button>
             </form>
-            <button >時間割を確認する</button>
-            <button class="button" onclick="location.href='set.html'">教科を追加する</button>
-            <button class="button" onclick="location.href='list.html'">時間割</button>
-            <button class="button" onclick="location.href='list.html'">時間割</button>
-            <button class="button" onclick="location.href='list.html'">時間割</button>
+            <form action="#" method="get" th:action="@{/class/list}" >
+                <button type="submit">クラス</button>
+            </form>
+            <form action="#" method="get" th:action="@{/department/list}" >
+                <button type="submit">学科</button>
+            </form>
+            <form action="#" method="get" th:action="@{/subject/list}" >
+                <button type="submit">科目</button>
+            </form>
+            <form action="#" method="get" th:action="@{/teacher/list}" >
+                <button type="submit">先生</button>
+            </form>
+            <form>
+                <button >時間割</button>
+            </form>
         </div>
     </div>
 </body>
