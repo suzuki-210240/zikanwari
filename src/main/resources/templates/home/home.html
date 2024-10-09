@@ -65,8 +65,10 @@
     <div class="container">
         <h1>時間割作成ツール</h1>
         <div class="button-container">
-            <button class="button" onclick="location.href='../class/list.html'">時間割作成する</button>
-            <button class="button" onclick="location.href='list2.html'">時間割を確認する</button>
+            <form th:action="@{/koma/list}" method="get">
+                <button type="submit">時間割作成する</button>
+            </form>
+            <button >時間割を確認する</button>
             <button class="button" onclick="location.href='set.html'">教科を追加する</button>
             <button class="button" onclick="location.href='list.html'">時間割</button>
             <button class="button" onclick="location.href='list.html'">時間割</button>
