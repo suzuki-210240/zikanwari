@@ -37,6 +37,8 @@ public class KomaService {
 
         String season = komaForm.getSeason();
         Integer s_code = komaForm.getS_code();
+        Integer r_number = komaRepositoryCustom.get_room(s_code);
+        Integer t_number = komaRepositoryCustom.get_tnumber(s_code);
         Integer setflg = komaRepositoryCustom.get_setflg(season, s_code);
         
         
@@ -58,8 +60,14 @@ public class KomaService {
                     //内ループ：コマの枠
                     for(int time = 0; time < f_time.length; time++){
                         Integer d_code = f_time[time];
+                        //休憩時間だったらとばす
                         if(d_code == btime){
                             continue;
+                        }
+
+                        if(komaRepositoryCustom.check_room(season, d_code, dayofweak, r_number)){
+                            if(komaRepositoryCustom.check_teacher(season,s_code ,d_code, dayofweak, d_code)){
+                            }
                         }
                     }
                 }

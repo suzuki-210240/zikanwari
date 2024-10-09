@@ -74,25 +74,30 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
     }
 
     @Override
-    public boolean check_teacher(String season,Integer d_code,String dayofweak,Integer r_number) {
+    public boolean check_teacher(String season,Integer s_code,Integer d_code,String dayofweak,Integer t_number) {
     // JPQLを使ってクエリを実行
         boolean ret = true;
-        String jpql = "SELECT s.t_number FROM KomaBean s WHERE s.season= :season AND s.d_code = :d_code AND s.dayofweak = :dayofweak AND s.r_number = :r_number"; // クラス名を使用
+        Integer sflg = 0;
+        if(season == "e"){
+            sflg = 1;
+        }else if(season == "l"){
+            sflg = 2;
+        }
+        String jpql =  "SELECT s.s_code FROM SubjectBean s WHERE s.t_number = :t_number AND s.s_code <> :s_code AND s.s_classification IN (0, :sflg)";
         TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
-        query.setParameter("sesason", season);
-        query.setParameter("d_code", d_code);
-        query.setParameter("dayofweak", dayofweak);
-        query.setParameter("r_number", r_number);
+        query.setParameter("t_number", t_number);
+        query.setParameter("s_code", s_code);
+        query.setParameter("sflg", sflg);
         
-        Integer data = query.getSingleResult();
-        if(data != null){
+        List<Integer> data = query.getResultList();
+        if(!data.isEmpty()){
             ret = false;
         }
         return ret; 
     }
 
     @Override
-    public OnlineBean set_online() {
+    public OnlineBean set_online(String season,Integer d_code,Integer s_code) {
     // JPQLを使ってクエリを実行
         OnlineBean onlineBeans = new OnlineBean();
         boolean ret = true;
@@ -116,5 +121,17 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
         query.setParameter("s_code", s_code);
         Integer ret = query.getSingleResult();
         return ret;
+    }
+
+    @Override
+    public Integer get_tnumber(Integer s_code) {
+    // JPQLを使ってクエリを実行
+        
+        String jpql = "SELECT s.t_number FROM SubjectBean s WHERE s.s_code = :s_code"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        query.setParameter("s_code", s_code);
+        
+        Integer room_num = query.getSingleResult();
+        return room_num; 
     }
 }
