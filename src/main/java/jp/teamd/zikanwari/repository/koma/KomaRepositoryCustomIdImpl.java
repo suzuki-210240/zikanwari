@@ -1,5 +1,7 @@
 package jp.teamd.zikanwari.repository.koma;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -92,19 +94,29 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
         List<Integer> data = query.getResultList();
         if(!data.isEmpty()){
             ret = false;
+        }else{
+            int count = 0;
+            for(int i = 0;i<data.size();i++){
+                Integer num = data.get(i);
+                jpql = "SELECT s.s_code FROM KomaBean s WHERE s.season = :season AND s.d_code = :d_code AND s.s_code = :s_code AND dayofweak = :dayofweak";
+                query = entityManager.createQuery(jpql, Integer.class);
+                query.setParameter("sesason", season);
+                query.setParameter("d_code", d_code);
+                query.setParameter("s_code", num);
+                query.setParameter("dayofweak", dayofweak);
+
+                Integer result = query.getSingleResult();
+                if(result != null){
+                    count++;
+                }   
+            }
+            if(count == 0){
+                ret = true;
+            }else{
+                ret = false;
+            }
         }
         return ret; 
-    }
-
-    @Override
-    public OnlineBean set_online(String season,Integer d_code,Integer s_code) {
-    // JPQLを使ってクエリを実行
-        OnlineBean onlineBeans = new OnlineBean();
-        boolean ret = true;
-        String jpql = "SELECT s.s_code FROM KomaBean s WHERE s.season= :season AND s.d_code = :d_code AND s.dayofweak = :dayofweak AND s.r_number = :r_number"; // クラス名を使用
-        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
-        
-        return onlineBeans; 
     }
 
     @Override
@@ -127,11 +139,39 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
     public Integer get_tnumber(Integer s_code) {
     // JPQLを使ってクエリを実行
         
-        String jpql = "SELECT s.t_number FROM SubjectBean s WHERE s.s_code = :s_code"; // クラス名を使用
+        String jpql = "SELECT s.t_number FROM SubjectBean s WHERE s.s_code = :s_code";
         TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
         query.setParameter("s_code", s_code);
         
         Integer room_num = query.getSingleResult();
         return room_num; 
+    }
+
+    @Override
+    public Integer cover_online(String season,Integer d_code,Integer s_code,Integer btime) {
+    // JPQLを使ってクエリを実行
+        Integer ret = 0;
+        Integer small = (s_code/100)*100;
+        Integer[] f_time = new Integer[]{1,2,31,32,4,5};
+        List<Integer> list = new ArrayList<Integer>(Arrays.asList(f_time));
+        list.remove(btime);
+        for(int i=0;i<list.size();i++){
+            d_code = list.get(i);
+            String jpql = "SELECT o FROM OnlineBean o WHERE o.season = :season AND o.d_code = :d_code AND o.s_code BETWEEN :small AND :s_code"; // クラス名を使用
+            TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+            query.setParameter("sesason", season);
+            query.setParameter("d_code", d_code);
+            query.setParameter("s_code", s_code);
+            query.setParameter("small", small);
+
+            Integer sq_result = query.getSingleResult();
+            if(sq_result == null){
+                ret = d_code;
+                break;
+            }
+            
+        }
+        
+        return ret; 
     }
 }

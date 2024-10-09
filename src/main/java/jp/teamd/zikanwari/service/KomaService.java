@@ -33,21 +33,21 @@ public class KomaService {
         boolean retflg = true; 
         KomaBean komaBean = new KomaBean();
         OnlineBean onlineBean = new OnlineBean();
-        OnlineForm onlineForm = new OnlineForm();
 
         String season = komaForm.getSeason();
         Integer s_code = komaForm.getS_code();
         Integer r_number = komaRepositoryCustom.get_room(s_code);
         Integer t_number = komaRepositoryCustom.get_tnumber(s_code);
         Integer setflg = komaRepositoryCustom.get_setflg(season, s_code);
+        Integer onlineflg = 0;
         
         
         if(setflg > 0){
             Integer btime = komaRepositoryCustom.get_btime(s_code);
             String onlineday = classRepositoryCustom.get_onlineday(s_code);
 
-            String[] days = {"月", "火", "水", "木", "金"};
-            Integer[] f_time = {1,2,31,32,4,5};
+            String[] days = new String[]{"月", "火", "水", "木", "金"};
+            Integer[] f_time = new Integer[]{1,2,31,32,4,5};
 
             //登録されていない週コマ数分繰り返し
             for(int i = 0; i < setflg; i++){
@@ -56,7 +56,6 @@ public class KomaService {
                 //外ループ：曜日
                 for(int day = 0;day < days.length; day++){
                     String dayofweak = days[day];
-
                     //内ループ：コマの枠
                     for(int time = 0; time < f_time.length; time++){
                         Integer d_code = f_time[time];
@@ -66,7 +65,16 @@ public class KomaService {
                         }
 
                         if(komaRepositoryCustom.check_room(season, d_code, dayofweak, r_number)){
-                            if(komaRepositoryCustom.check_teacher(season,s_code ,d_code, dayofweak, d_code)){
+                            if(komaRepositoryCustom.check_teacher(season,s_code ,d_code, dayofweak, t_number)){
+                                if(onlineday == dayofweak){
+                                    if(komaRepositoryCustom.cover_online(season, d_code, s_code, btime) > 0){
+                                        onlineBean.setSeason(season);
+                                        onlineBean.setD_code(d_code);
+                                        onlineBean.setS_code(s_code);
+                                        onlineRepository.save(onlineBean);
+                                    }
+                                }else{
+                                }
                             }
                         }
                     }

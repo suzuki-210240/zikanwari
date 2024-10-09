@@ -58,7 +58,7 @@ public class SubjectController {
         model.addAttribute("subject", subjectService.findAll());
         
         // クラス情報も再度取得してモデルに追加
-        model.addAttribute("class", classService.findAll());
+        model.addAttribute("clss", classService.findAll());
         
         // フィルター結果を取得
         List<SubjectForm> cbitem = subjectService.findByC_code(c_code);

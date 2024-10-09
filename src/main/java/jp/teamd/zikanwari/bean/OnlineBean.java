@@ -19,6 +19,4 @@ public class OnlineBean {
     private Integer d_code;//何コマ目かの枠番号
     @Id
     private Integer s_code;//科目コード
-    @Id
-    private String dayofweak;//月火水木金
 }
