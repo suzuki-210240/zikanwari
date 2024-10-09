@@ -11,4 +11,5 @@ public interface KomaRepositoryCustom {
     public boolean check_room(String season,Integer d_code,String dayofweak,Integer r_number);
     public boolean check_teacher(String season,Integer d_code,String dayofweak,Integer r_number);
     public OnlineBean set_online();
+    public Integer get_setflg(String season,Integer s_code);
 }

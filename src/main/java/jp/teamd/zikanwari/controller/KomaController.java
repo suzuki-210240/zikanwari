@@ -32,8 +32,11 @@ public class KomaController {
     }
 
     @PostMapping(path="create")
-    String create(KomaForm form,Model mode){
-        komaService.create(form);
+    String create(KomaForm form,Model model){
+        if(komaService.create(form)){
+        }else{
+            model.addAttribute("message", "この科目は週の上限分登録済みです。");
+        }
         return "redirect:/koma";
     }
 

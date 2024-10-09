@@ -29,26 +29,49 @@ public class KomaService {
     @Autowired
     ClassRepositoryCustom classRepositoryCustom;
 
-    public KomaForm create(KomaForm komaForm){
+    public Boolean create(KomaForm komaForm){
+        boolean retflg = true; 
         KomaBean komaBean = new KomaBean();
         OnlineBean onlineBean = new OnlineBean();
         OnlineForm onlineForm = new OnlineForm();
 
         String season = komaForm.getSeason();
-        Integer d_code = komaForm.getD_code();
-        String dayofweak = komaForm.getDayofweak();
         Integer s_code = komaForm.getS_code();
+        Integer setflg = komaRepositoryCustom.get_setflg(season, s_code);
         
-        Integer btime = komaRepositoryCustom.get_btime(s_code);
-        String onlineday = classRepositoryCustom.get_onlineday(s_code);
-
-        String[] days = {"月", "火", "水", "木", "金"};
-        Integer[] f_time = {1,2,31,32,4,5};
-
         
-        BeanUtils.copyProperties(komaForm, komaBean);
-        komaRepository.save(komaBean);
-        return komaForm;
+        if(setflg > 0){
+            Integer btime = komaRepositoryCustom.get_btime(s_code);
+            String onlineday = classRepositoryCustom.get_onlineday(s_code);
+
+            String[] days = {"月", "火", "水", "木", "金"};
+            Integer[] f_time = {1,2,31,32,4,5};
+
+            //登録されていない週コマ数分繰り返し
+            for(int i = 0; i < setflg; i++){
+                boolean seton = false; //登録成功時にtrueになる
+
+                //外ループ：曜日
+                for(int day = 0;day < days.length; day++){
+                    String dayofweak = days[day];
+
+                    //内ループ：コマの枠
+                    for(int time = 0; time < f_time.length; time++){
+                        Integer d_code = f_time[time];
+                        if(d_code == btime){
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            BeanUtils.copyProperties(komaForm, komaBean);
+            komaRepository.save(komaBean);
+        }else{
+            retflg = false;
+        }
+
+        return retflg;
     }
 
     public KomaForm update(KomaForm komaForm){

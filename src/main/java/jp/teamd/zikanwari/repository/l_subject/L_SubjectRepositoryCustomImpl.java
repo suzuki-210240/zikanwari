@@ -49,6 +49,10 @@ public class L_SubjectRepositoryCustomImpl implements L_SubjectRepositoryCustom 
 
     @Override
     public Integer get_setflg(Integer s_code){
-        String jpql = 
+        String jpql = "SELECT s.setflg FROM L_SubjectBean s WHERE s.s_code = :s_code";
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        query.setParameter("s_code", s_code);
+        Integer ret = query.getSingleResult();
+        return ret;
     }
 }

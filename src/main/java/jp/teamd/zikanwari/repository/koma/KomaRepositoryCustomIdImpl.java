@@ -101,4 +101,20 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
         
         return onlineBeans; 
     }
+
+    @Override
+    public Integer get_setflg(String season,Integer s_code){
+        String table = "";
+        if(season == "e"){
+            table = "E_SubjectBean";
+        }else if(season == "l"){
+            table = "L_SubjectBean";
+        }
+        String jpql = "SELECT s.setflg FROM :table s WHERE s.s_code = :s_code";
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        query.setParameter("table", table);
+        query.setParameter("s_code", s_code);
+        Integer ret = query.getSingleResult();
+        return ret;
+    }
 }

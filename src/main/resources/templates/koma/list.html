@@ -10,9 +10,7 @@
         <form th:action="@{/pages/create}" th:object="${komaForm}" method="post">
             <table class="table table-striped table-bordered table-condensed">
                 <tr><td>受講時期:</td><td><input type="text" name="season"  th:field="*{season}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('season')}"th:errors="*{season}" class="error-message">error!</span></td></tr>
-                <tr><td>コマ番号:</td><td><input type="text" name="d_code" th:field="*{d_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('d_code')}"th:errors="*{d_code}" class="error-message">error!</span></td></tr>
                 <tr><td>科目コード:</td><td><input type="text" name="s_code" th:field="*{s_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('s_code')}"th:errors="*{s_code}" class="error-message">error!</span></td></tr>
-                <tr><td>曜日:</td><td><input type="text" name="dayofweak" th:field="*{dayofweak}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('dayofweak')}"th:errors="*{dayofweak}" class="error-message">error!</span></td></tr>
             </table>
             <input type="submit" value="追加"/> 
         </form>
