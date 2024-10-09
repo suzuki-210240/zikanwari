@@ -40,7 +40,7 @@ public class SubjectController {
         Integer code = subjectService.getCode(c_code);
         subjectService.create(code, s_name, c_code, t_number, s_classification, use_room_number);
         subjectService.setSubject(code, s_name, c_code, t_number, s_classification,weak_frame,use_room_number);
-        return "redirect:/subject";
+        return "subject/set";
     }
 
 

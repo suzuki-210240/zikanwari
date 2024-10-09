@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.teamd.zikanwari.form.KomaForm;
 import jp.teamd.zikanwari.service.KomaService;
+import jp.teamd.zikanwari.service.SubjectService;
 
 
 @Controller
@@ -19,6 +20,8 @@ import jp.teamd.zikanwari.service.KomaService;
 public class KomaController {
     @Autowired
     KomaService komaService;
+    @Autowired
+    SubjectService subjectService;
 
     @ModelAttribute
     KomaForm setUpForm(){
