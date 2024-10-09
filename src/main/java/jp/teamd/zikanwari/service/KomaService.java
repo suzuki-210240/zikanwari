@@ -33,8 +33,9 @@ public class KomaService {
         KomaBean komaBean = new KomaBean();
         OnlineBean onlineBean = new OnlineBean();
 
-        String season = komaForm.getSeason();
+        
         Integer s_code = komaForm.getS_code();
+        String season = komaRepositoryCustom.get_season(s_code);
         Integer r_number = komaRepositoryCustom.get_room(s_code);
         Integer t_number = komaRepositoryCustom.get_tnumber(s_code);
         Integer setflg = komaRepositoryCustom.get_setflg(season, s_code);
@@ -86,6 +87,7 @@ public class KomaService {
                                         BeanUtils.copyProperties(komaForm, komaBean);
                                         komaRepository.save(komaBean);
                                         set_on = true;
+                                        komaRepositoryCustom.update_setflg(season, s_code);
                                         break;
                                     }
                                 }else{
@@ -95,12 +97,14 @@ public class KomaService {
                                         BeanUtils.copyProperties(komaForm, komaBean);
                                         komaRepository.save(komaBean);
                                         set_on = true;
+                                        komaRepositoryCustom.update_setflg(season, s_code);
                                         break;
                                 }
                             }
                         }
                     }
                 }
+                
             }
         }else{
             retflg = false;
@@ -131,6 +135,7 @@ public class KomaService {
         }
         return formList;
     }
+
     public KomaForm findOne(String season,Integer d_code,Integer s_code,String dayofweak){
         KomaId komaId = new KomaId(season,d_code,s_code,dayofweak);
         Optional<KomaBean> opt = komaRepository.findById(komaId);
@@ -139,5 +144,10 @@ public class KomaService {
             BeanUtils.copyProperties(opt.get(), komaForm);
         });
         return komaForm;
+    }
+
+    public Boolean AutoSet(){
+
+        return true;
     }
 }

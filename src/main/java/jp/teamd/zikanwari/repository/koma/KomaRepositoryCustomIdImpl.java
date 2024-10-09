@@ -25,6 +25,27 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
     }
 
     @Override
+    public String get_season(Integer s_code) {
+    // JPQLを使ってクエリを実行
+        
+        String jpql = "SELECT s.s_classification FROM SubjectBean s WHERE s.s_code = :s_code";
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        query.setParameter("s_code", s_code);
+        
+        Integer sflg = query.getSingleResult();
+        String ret = "";
+        if(sflg == 1){
+            ret = "e";
+        }else if(sflg == 2){
+            ret = "l";
+        }else{
+            ret = "all";
+        }
+        
+        return ret; 
+    }
+
+    @Override
     public Integer get_btime(Integer s_code) {
     // JPQLを使ってクエリを実行
         
@@ -120,17 +141,19 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
     @Override
     public Integer get_setflg(String season,Integer s_code){
         String table = "";
-        if(season == "e"){
-            table = "E_SubjectBean";
-        }else if(season == "l"){
+        if (season.equals("e")) {
+            table = "E_SubjectBean"; // equalsメソッドで文字列を比較
+        } else if (season.equals("l")) {
             table = "L_SubjectBean";
         }
-        String jpql = "SELECT s.setflg FROM :table s WHERE s.s_code = :s_code";
+
+        String jpql = "SELECT s.setflg FROM " + table + " s WHERE s.s_code = :s_code";
         TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
-        query.setParameter("table", table);
         query.setParameter("s_code", s_code);
+
         Integer ret = query.getSingleResult();
         return ret;
+
     }
 
     @Override
@@ -171,5 +194,23 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
         }
         
         return ret; 
+    }
+
+    @Override
+    public void update_setflg(String season,Integer s_code) {
+    // JPQLを使ってクエリを実行
+        String table = "";
+        if (season.equals("e")) {
+            table = "E_SubjectBean"; // equalsメソッドで文字列を比較
+        } else if (season.equals("l")) {
+            table = "L_SubjectBean";
+        }
+        
+        String jpql = "UPDATE " + table + " e SET e.setflg = e.setflg - 1 WHERE e.sub_code = :sub_code";
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        query.setParameter("sub_code", s_code);
+        
+        //int updatedCount = query.executeUpdate(); // 更新された行数を取得
+        
     }
 }
