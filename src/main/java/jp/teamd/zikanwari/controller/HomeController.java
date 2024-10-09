@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+import jp.teamd.zikanwari.form.KomaForm;
 
 
 
 @Controller
-@RequestMapping("home")
 public class HomeController {
 
-    @GetMapping
+    @GetMapping("/")
     String list(Model model){
-        return "home/home";
+        return "home";
     }
 
     @GetMapping("/koma/list")
-    public String koma() {
-        
+    public String koma(@ModelAttribute KomaForm komaForm,Model model) {
+        model.addAttribute("komaForm",komaForm);
         return "koma/list";
     }
     
