@@ -8,8 +8,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jp.teamd.zikanwari.bean.KomaBean;
 import org.springframework.stereotype.Component;
-import jp.teamd.zikanwari.bean.OnlineBean;
-import jp.teamd.zikanwari.repository.OnlineRepository;
 
 @Component
 public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {

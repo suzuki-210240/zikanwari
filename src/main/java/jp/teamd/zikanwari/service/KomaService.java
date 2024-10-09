@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import jp.teamd.zikanwari.KomaId;
 import jp.teamd.zikanwari.bean.KomaBean;
 import jp.teamd.zikanwari.form.KomaForm;
-import jp.teamd.zikanwari.form.OnlineForm;
 import jp.teamd.zikanwari.bean.OnlineBean;
 import jp.teamd.zikanwari.repository.koma.KomaRepository;
 import jp.teamd.zikanwari.repository.koma.KomaRepositoryCustom;
@@ -51,11 +50,14 @@ public class KomaService {
 
             //登録されていない週コマ数分繰り返し
             for(int i = 0; i < setflg; i++){
-                boolean seton = false; //登録成功時にtrueになる
+                boolean set_on = false; //登録成功時にtrueになる
 
                 //外ループ：曜日
                 for(int day = 0;day < days.length; day++){
                     String dayofweak = days[day];
+                    if(set_on){
+                        break;
+                    }
                     //内ループ：コマの枠
                     for(int time = 0; time < f_time.length; time++){
                         Integer d_code = f_time[time];
@@ -64,25 +66,42 @@ public class KomaService {
                             continue;
                         }
 
+                        //使用教室の重複確認
                         if(komaRepositoryCustom.check_room(season, d_code, dayofweak, r_number)){
+                            //担当教員の重複確認
                             if(komaRepositoryCustom.check_teacher(season,s_code ,d_code, dayofweak, t_number)){
+                                //オンラインに指定されている日か
                                 if(onlineday == dayofweak){
+                                    //オンライン日内で重複がないか確認
                                     if(komaRepositoryCustom.cover_online(season, d_code, s_code, btime) > 0){
                                         onlineBean.setSeason(season);
                                         onlineBean.setD_code(d_code);
                                         onlineBean.setS_code(s_code);
                                         onlineRepository.save(onlineBean);
+                                        onlineflg = 1;
+                                        r_number = 9999;
+                                        komaForm.setR_number(r_number);
+                                        komaForm.setOnlineflg(onlineflg);
+                                        komaForm.setDayofweak(dayofweak);
+                                        BeanUtils.copyProperties(komaForm, komaBean);
+                                        komaRepository.save(komaBean);
+                                        set_on = true;
+                                        break;
                                     }
                                 }else{
+                                        komaForm.setR_number(r_number);
+                                        komaForm.setOnlineflg(onlineflg);
+                                        komaForm.setDayofweak(dayofweak);
+                                        BeanUtils.copyProperties(komaForm, komaBean);
+                                        komaRepository.save(komaBean);
+                                        set_on = true;
+                                        break;
                                 }
                             }
                         }
                     }
                 }
             }
-
-            BeanUtils.copyProperties(komaForm, komaBean);
-            komaRepository.save(komaBean);
         }else{
             retflg = false;
         }
