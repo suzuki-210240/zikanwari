@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時間割作成サイト</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f8ff, #add8e6); /* 柔らかい青系グラデーション背景 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85); /* 半透明の白で背景と調和 */
+            border-radius: 15px;
+            padding: 50px; /* パディングを大きく */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 500px; /* コンテナの幅を大きく */
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px; /* 見出しの下の余白を調整 */
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px; /* ボタン間の間隔をさらに広げる */
+        }
+
+        .button {
+            background: linear-gradient(135deg, #6a5acd, #00bfff); /* 青から紫のグラデーション */
+            color: white;
+            border: none;
+            padding: 20px 40px; /* 大きめのパディングに調整 */
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 20px; /* フォントサイズも大きく */
+            transition: background 0.3s ease, transform 0.2s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            flex: 1 1 calc(50% - 20px); /* ボタンが2列に並ぶように */
+            max-width: 180px; /* 各ボタンの幅を大きく */
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #836fff, #1e90ff); /* グラデーションを少し明るく */
+            transform: scale(1.05);
+        }
+
+        .button:active {
+            background: linear-gradient(135deg, #4b0082, #4682b4); /* クリック時に濃い色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>時間割作成ツール</h1>
+        <div class="button-container">
+            <button class="button" onclick="location.href='../class/list.html'">時間割作成する</button>
+            <button class="button" onclick="location.href='list2.html'">時間割を確認する</button>
+            <button class="button" onclick="location.href='set.html'">教科を追加する</button>
+            <button class="button" onclick="location.href='list.html'">時間割</button>
+            <button class="button" onclick="location.href='list.html'">時間割</button>
+            <button class="button" onclick="location.href='list.html'">時間割</button>
+        </div>
+    </div>
+</body>
+</html>
