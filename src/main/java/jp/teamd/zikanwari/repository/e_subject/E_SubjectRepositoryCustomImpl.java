@@ -39,4 +39,13 @@ public class E_SubjectRepositoryCustomImpl implements E_SubjectRepositoryCustom 
         Integer ret = resultList + 1;
         return ret; // 結果を返す
     }
+
+    @Override
+    public List<Integer> get_subcode() {
+        // JPQLを使ってクエリを実行
+        String jpql = "SELECT s.sub_code FROM E_SubjectBean s WHERE s.setflg > 0"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        
+        return query.getResultList(); // 結果を返す
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import jp.teamd.zikanwari.bean.SubjectBean;
 import jp.teamd.zikanwari.bean.E_SubjectBean;
 import jp.teamd.zikanwari.bean.L_SubjectBean;
+import jp.teamd.zikanwari.bean.All_SubjectBean;
 import jp.teamd.zikanwari.form.SubjectForm;
 import jp.teamd.zikanwari.repository.all_subject.All_SubjectRepositoryCustom;
 import jp.teamd.zikanwari.repository.e_subject.E_SubjectRepository;
@@ -132,5 +133,24 @@ public class SubjectService {
         }
     }
 
-    
+    public List<SubjectForm> get_notsetSub(){
+            List<SubjectForm> subjectForms = new ArrayList<>();
+            
+            List<Integer> e_sublist = e_SubjectRepositoryCustom.get_subcode();
+            List<Integer> l_sublist = l_SubjectRepositoryCustom.get_subcode();
+
+            for(Integer i :e_sublist){
+                SubjectForm subjectForm = new SubjectForm();
+                subjectForm.setS_code(i);
+                subjectForms.add(subjectForm);
+            }
+
+            for(Integer i :l_sublist){
+                SubjectForm subjectForm = new SubjectForm();
+                subjectForm.setS_code(i);
+                subjectForms.add(subjectForm);
+            }
+
+            return subjectForms;
+    }
 }

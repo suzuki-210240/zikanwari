@@ -66,6 +66,9 @@
         <h1>時間割作成ツール</h1>
         <div class="button-container">
             <form action="#" method="get" th:action="@{/koma/list}" >
+                <button type="submit">時間割の確認</button>
+            </form>
+            <form action="#" method="get" th:action="@{/koma/set}" >
                 <button type="submit">時間割を作成する</button>
             </form>
             <form action="#" method="get" th:action="@{/class/list}" >
@@ -80,9 +83,7 @@
             <form action="#" method="get" th:action="@{/teacher/list}" >
                 <button type="submit">教員</button>
             </form>
-            <form>
-                <button >時間割</button>
-            </form>
+            
         </div>
     </div>
 </body>

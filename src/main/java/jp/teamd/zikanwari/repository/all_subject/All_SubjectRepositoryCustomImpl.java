@@ -20,4 +20,13 @@ public class All_SubjectRepositoryCustomImpl implements All_SubjectRepositoryCus
         query.setParameter("es_code", es_code); // パラメータを設定
         return query.getResultList(); // 結果を返す
     }
+
+    @Override
+    public List<Integer> get_subcode() {
+        // JPQLを使ってクエリを実行
+        String jpql = "SELECT s.sub_code FROM All_SubjectBean s WHERE s.setflg > 0"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        
+        return query.getResultList(); // 結果を返す
+    }
 }

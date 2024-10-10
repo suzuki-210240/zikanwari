@@ -55,4 +55,13 @@ public class L_SubjectRepositoryCustomImpl implements L_SubjectRepositoryCustom 
         Integer ret = query.getSingleResult();
         return ret;
     }
+
+    @Override
+    public List<Integer> get_subcode() {
+        // JPQLを使ってクエリを実行
+        String jpql = "SELECT s.sub_code FROM L_SubjectBean s WHERE s.setflg > 0"; // クラス名を使用
+        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
+        
+        return query.getResultList(); // 結果を返す
+    }
 }

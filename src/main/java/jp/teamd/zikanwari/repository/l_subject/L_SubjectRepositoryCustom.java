@@ -7,4 +7,5 @@ public interface L_SubjectRepositoryCustom {
     public String create_code();
     public Integer get_number();
     public Integer get_setflg(Integer s_code);
+    public List<Integer> get_subcode();
 }

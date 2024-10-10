@@ -13,5 +13,9 @@ public class SubjectForm {
     private Integer s_classification;
     private Integer use_room_number;
     private Integer weak_frame;
+
+    public Integer get_s_code(){
+        return s_code;
+    }
 }
 
