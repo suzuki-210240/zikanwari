@@ -44,5 +44,10 @@ public class ClassController {
         return "redirect:/class";
     }
 
+    @PostMapping(path = "gohome")
+    String gohome(){
+        return "/home";
+    }
+
 }
 

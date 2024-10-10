@@ -2,12 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <title>科目一覧画面</title>
+        <title>科目確認画面</title>
         <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     </head>
     <body>
-        <h4>クラスを選択</h4>
+        <form th:action="@{/subject/gohome}" method="post">
+            <input type="submit" name="form" value="メインページへ" />
+        </form>
+        <h2>科目確認ページ</h2>
+        <h5>クラスを選択</h5>
         <form  th:action="@{/subject/filter}" method="post">
             <select name="c_code" id="cbid">
                 <option value="" disabled selected>クラスを選択してください</option>
@@ -49,9 +53,6 @@
                     </tr>
                 </tbody>
             </table>
-            <form th:action="@{/subject/redirect}" method="post">
-                <input type="submit" name="form" value="再検索" />
-            </form>
         </div>
         
     </body>

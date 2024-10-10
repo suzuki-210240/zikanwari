@@ -2,11 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <title>書籍登録一覧画面</title>
+        <title>教員一覧・追加画面</title>
         <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     </head>
     <body>
+        <form th:action="@{/teacher/gohome}" method="post">
+            <input type="submit" name="form" value="メインページへ" />
+        </form>
+        <h2>教員一覧・追加ページ</h2>
         <form th:action="@{/teacher/create}" th:object="${teacherForm}" method="post">
             <table class="table table-striped table-bordered table-condensed">
                 <tr><td>教員番号:</td><td><input type="text" name="t_number"  th:field="*{t_number}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('t_number')}"th:errors="*{t_number}" class="error-message">error!</span></td></tr>

@@ -2,11 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <title>書籍登録一覧画面</title>
+        <title>学科一覧・登録画面</title>
         <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     </head>
     <body>
+        <form th:action="@{/department/gohome}" method="post">
+            <input type="submit" name="form" value="メインページへ" />
+        </form>
+        <h2>学科一覧・登録ページ</h2>
         <form th:action="@{/department/create}" th:object="${departmentForm}" method="post">
             <table class="table table-striped table-bordered table-condensed">
                 <tr><td>学科コード:</td><td><input type="text" name="d_code"  th:field="*{d_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('d_code')}"th:errors="*{d_code}" class="error-message">error!</span></td></tr>

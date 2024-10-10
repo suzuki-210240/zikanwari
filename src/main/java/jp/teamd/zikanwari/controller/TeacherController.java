@@ -44,5 +44,9 @@ public class TeacherController {
         return "redirect:/teacher";
     }
 
+    @PostMapping(path = "gohome")
+    String gohome(){
+        return "/home";
+    }
 }
 

@@ -73,9 +73,9 @@ public class SubjectController {
         return "subject/set";
     }
 
-    @PostMapping(path = "redirect")
-    String redirect(){
-        return "redirect:/subject";
+    @PostMapping(path = "gohome")
+    String gohome(){
+        return "/home";
     }
 
     @PostMapping(path = "goToTop")

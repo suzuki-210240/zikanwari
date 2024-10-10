@@ -2,12 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <title>クラス一覧画面</title>
+        <title>クラス一覧・追加画面</title>
         <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}"/>
         <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style2.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     </head>
     <body>
+        <form th:action="@{/class/gohome}" method="post">
+            <input type="submit" name="form" value="メインページへ" />
+        </form>
+        <h2>クラス一覧・追加ページ</h2>
         <form th:action="@{/class/create}" th:object="${classForm}" method="post">
             <table class="table table-striped table-bordered table-condensed">
                 <tr><td>クラスコード:</td><td><input type="text" name="c_code"  th:field="*{c_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('c_code')}"th:errors="*{c_code}" class="error-message">error!</span></td></tr>

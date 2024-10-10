@@ -66,5 +66,10 @@ public class KomaController {
     String goToTop(){
         return "redirect:/koma";
     }
+
+    @PostMapping(path = "gohome")
+    String gohome(){
+        return "/home";
+    }
 }
 

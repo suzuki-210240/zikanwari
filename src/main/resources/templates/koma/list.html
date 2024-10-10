@@ -7,6 +7,10 @@
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     </head>
     <body>
+        <form th:action="@{/koma/gohome}" method="post">
+            <input type="submit" name="form" value="メインページへ" />
+        </form>
+        <h2>時間割追加ページ</h2>
         <form th:action="@{/pages/create}" th:object="${komaForm}" method="post">
             <table class="table table-striped table-bordered table-condensed">
                 <tr><td>科目コード:</td><td><input type="text" name="s_code" th:field="*{s_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('s_code')}"th:errors="*{s_code}" class="error-message">error!</span></td></tr>
