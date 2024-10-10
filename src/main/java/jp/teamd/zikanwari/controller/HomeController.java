@@ -1,7 +1,5 @@
 package jp.teamd.zikanwari.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
@@ -17,6 +15,7 @@ import jp.teamd.zikanwari.service.ClassService;
 import jp.teamd.zikanwari.service.SubjectService;
 import jp.teamd.zikanwari.service.TeacherService;
 import jp.teamd.zikanwari.service.DepartmentService;
+import jp.teamd.zikanwari.service.KomaService;
 
 
 
@@ -31,6 +30,8 @@ public class HomeController {
     TeacherService teacherService;
     @Autowired
     DepartmentService departmentService;
+    @Autowired
+    KomaService komaService;
 
 
     @GetMapping("/")
@@ -41,6 +42,7 @@ public class HomeController {
     @GetMapping("/koma/list")
     public String koma(@ModelAttribute KomaForm komaForm,Model model) {
         model.addAttribute("komaForm",komaForm);
+        model.addAttribute("koma",komaService.findAll());
         return "koma/list";
     }
 

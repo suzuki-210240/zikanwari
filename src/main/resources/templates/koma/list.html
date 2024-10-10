@@ -7,53 +7,32 @@
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     </head>
     <body>
+        
         <form th:action="@{/koma/gohome}" method="post">
             <input type="submit" name="form" value="メインページへ" />
         </form>
-        <h2>科目確認ページ</h2>
-        <h5>クラスを選択</h5>
-        <form  th:action="@{/koma/filter}" method="post">
-            <select name="c_code" id="cbid">
-                <option value="" disabled selected>クラスを選択してください</option>
-                <option th:each="item : ${clss}" th:value="${item.c_code}" th:text="${item.c_code}"></option>
-            </select>
-            <input type="submit" name="form" value="検索" />
-        </form>
-        <form th:action="@{/koma/set}" method="post">
-            <input type="submit" name="form" value="要素追加" />
-        </form>
-        
-        <hr />
-        <div th:if="${filter}">
-            <table class="table table-bordered" >
-                <thead>
-                    <tr>
-                        <th>番号</th>
-                        <th>科目名</th>
-                        <th>クラスコード</th>
-                        <th>担当教員名</th>
-                        <th>フラグ</th>
-                        <th>使用教室番号</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="subject : ${filter}">
-                        <td th:text="${subject.s_code}">1</td>
-                        <td th:text="${subject.s_name}">サンプル科目</td>
-                        <td th:text="${subject.c_code}">999999</td>
-                        <td th:text="${subject.t_number}">999999</td>
-                        <td th:text="${subject.s_classification}">js</td>
-                        <td th:text="${subject.use_room_number}">408</td>
-                        <td>
-                            <form th:action="@{/subject/delete}" method="post">
-                                <input type="submit" name="form" value="削除" />
-                                <input type="hidden" name="s_code" th:value="${subject.s_code}"/>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
+        <h2>時間割確認ページ</h2>
+        <table>
+            
+            <tr th:each="koma:${koma}">
+                <td th:text="${koma.season}">受講時期</td>
+                <td th:text="${koma.d_code}">コマ番号</td>
+                <td th:text="${koma.s_code}">科目</td>
+                <td th:text="${koma.dayofweak}">曜日</td>
+                <td th:text="${koma.r_number}">111</td>
+                <td>
+                    <form th:action="@{/koma/edit}" method="post">
+                        <input type="submit" name="form" value="編集" />
+                        <input type="hidden" name="id" th:value="${koma.season} + ',' + ${koma.d_code} + ',' + ${koma.s_code} + ',' + ${koma.dayofweak}" />
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/koma/delete}" method="post">
+                        <input type="submit" name="form" value="削除" />
+                        <input type="hidden" name="id" th:value="${koma.season} + ',' + ${koma.d_code} + ',' + ${koma.s_code} + ',' + ${koma.dayofweak}" />
+                    </form>
+                </td>
+            </tr>
+        </table>
     </body>
 </html>
