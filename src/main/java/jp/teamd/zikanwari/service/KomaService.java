@@ -156,8 +156,19 @@ public class KomaService {
         return komaForm;
     }
 
-    public Boolean AutoSet(){
-
-        return true;
+    public boolean check_room(String season, Integer d_code,String dayofweak,Integer r_number){
+        if(komaRepositoryCustom.check_room(season, d_code, dayofweak, r_number)){
+            return true; 
+        }else{
+            return false; 
+        }
+    }
+    public boolean check_teacher(String season, Integer d_code,String dayofweak,Integer r_number,Integer s_code){
+        Integer t_number = komaRepositoryCustom.get_tnumber(s_code);
+        if(komaRepositoryCustom.check_teacher(season, s_code, d_code, dayofweak, t_number)){
+            return true; 
+        }else{
+            return false; 
+        }
     }
 }

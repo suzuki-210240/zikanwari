@@ -1,58 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8" />
-        <title>時間割追加画面</title>
-        <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}"/>
-        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
-    </head>
-    <body>
-        <form th:action="@{/koma/edit}" th:object="${komaForm}" method="post">
-            <table>
-                <tr>
-                    <td>受講時期</td>
-                    <td>
-                        <input type="text" name="season" th:field="*{season}" th:errorclass="error-input"/>
-                        <span th:if="${#fields.hasErrors('season')}" th:errors="*{season}" class="error-messages">error!</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>コマ番号</td>
-                    <td>
-                        <input type="text" name="d_code" th:field="*{d_code}" />
-                        <span th:if="${#fields.hasErrors('d_code')}" th:errors="*{d_code}" class="error-messages">error!</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>科目番号</td>
-                    <td>
-                        <input type="text" name="s_code" th:field="*{s_code}" />
-                        <span th:if="${#fields.hasErrors('s_code')}" th:errors="*{s_code}" class="error-messages">error!</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>曜日</td>
-                    <td>
-                        <input type="text" name="dayofweak" th:field="*{dayofweak}" />
-                        <span th:if="${#fields.hasErrors('dayofweak')}" th:errors="*{dayofweak}" class="error-messages">error!</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>使用教室</td>
-                    <td>
-                        <input type="text" name="r_number" th:field="*{r_number}" />
-                        <span th:if="${#fields.hasErrors('r_number')}" th:errors="*{r_number}" class="error-messages">error!</span>
-                    </td>
-                </tr>
-                
-            </table>
-            <form th:action="@{/koma/update}" method="post">
-                <input type="submit" name="form" value="削除" />
-                <input type="hidden" name="id" th:value="${koma.season} + ',' + ${koma.d_code} + ',' + ${koma.s_code} + ',' + ${koma.dayofweak}" />
+<head>
+    <meta charset="UTF-8" />
+    <title>時間割追加画面</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <h2>時間割編集ページ</h2>
+    <form th:action="@{/koma/update}" th:object="${koma}" method="post">
+        <table>
+            <tr>
+                <td>受講時期</td>
+                <td>
+                    <input type="text" th:field="*{season}" th:errorclass="error-input"/>
+                    <span th:if="${#fields.hasErrors('season')}" th:errors="*{season}" class="error-messages"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>コマ番号</td>
+                <td>
+                    <input type="text" th:field="*{d_code}"/>
+                    <span th:if="${#fields.hasErrors('d_code')}" th:errors="*{d_code}" class="error-messages"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>科目番号</td>
+                <td>
+                    <input type="text" th:field="*{s_code}"/>
+                    <span th:if="${#fields.hasErrors('s_code')}" th:errors="*{s_code}" class="error-messages"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>曜日</td>
+                <td>
+                    <input type="text" th:field="*{dayofweak}"/>
+                    <span th:if="${#fields.hasErrors('dayofweak')}" th:errors="*{dayofweak}" class="error-messages"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>使用教室</td>
+                <td>
+                    <input type="text" th:field="*{r_number}"/>
+                    <span th:if="${#fields.hasErrors('r_number')}" th:errors="*{r_number}" class="error-messages"></span>
+                </td>
+            </tr>
+        </table>
+        
+        
+        <div>
+            <input type="submit" name="form" value="更新" />
+            <input type="hidden" name="season" th:value="${koma.season}" />
+            <input type="hidden" name="d_code" th:value="${koma.d_code}" />
+            <input type="hidden" name="s_code" th:value="${koma.s_code}" />
+            <input type="hidden" name="dayofweak" th:value="${koma.dayofweak}" />
+        </div>
+        <div th:if="${message}" class="alert alert-warning" role="alert">
+            <p th:text="${message}"></p>
+        </div>
+        
+        <div>
+            <form th:action="@{/koma/check}" method="post" style="display:inline;">
+                <input type="submit" name="form" value="重複確認" />
+                <input type="hidden" name="season" th:value="${koma.season}" />
+                <input type="hidden" name="d_code" th:value="${koma.d_code}" />
+                <input type="hidden" name="s_code" th:value="${koma.s_code}" />
+                <input type="hidden" name="dayofweak" th:value="${koma.dayofweak}" />
             </form>
-            <form th:action="@{/subject/goToTop}" method="post">
+        </div>
+        
+        
+        <div>
+            <form th:action="@{/koma/goTolist}" method="post" style="display:inline;">
                 <input type="submit" name="form" value="戻る" />
             </form>
-        </form>
-    </body>
+        </div>
+    </form>
+</body>
 </html>

@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.teamd.zikanwari.bean.KomaBean;
 import jp.teamd.zikanwari.form.KomaForm;
 import jp.teamd.zikanwari.service.KomaService;
 import jp.teamd.zikanwari.service.SubjectService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -44,28 +47,68 @@ public class KomaController {
     }
 
     @PostMapping(path = "edit",params = "form")
-    String editForm(@RequestParam String season,Integer d_code,Integer s_code,String dayofweak,KomaForm form){
-        KomaForm bookForm = komaService.findOne(season,d_code,s_code,dayofweak);
-        BeanUtils.copyProperties(bookForm, form);
+    String editForm(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak,Model model){
+        KomaForm form = new KomaForm();
+        form.setSeason(season);
+        form.setD_code(d_code);
+        form.setS_code(s_code);
+        form.setDayofweak(dayofweak);
+        KomaForm komaForm = komaService.findOne(season,d_code,s_code,dayofweak);
+        if (komaForm != null) {
+            BeanUtils.copyProperties(komaForm, form);
+        }
+    
+        model.addAttribute("koma", form);
         return "koma/edit";
     }
+    
+    @PostMapping(path = "check")
+    public String check(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak,Model model) {
+        
+        if(komaService.check_room(season, d_code, dayofweak, s_code)){
+            if(komaService.check_teacher(season, d_code, dayofweak, d_code, s_code)){
+                model.addAttribute("message", "重複はありませんでした。");
+            }else{
+                model.addAttribute("message", "入力エラー：教員が重複しています");
+            }
+        }else{
+            model.addAttribute("message", "入力エラー：教室が重複しています");
+        }
+        return "redirect:/koma"; // 更新後はリダイレクト
+    }
 
-    @PostMapping(path = "edit")
-    String edit(@RequestParam Integer id,KomaForm form){
+    @PostMapping("update")
+    public String update(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak) {
+        KomaForm form = new KomaForm();
+        KomaBean komaBean = new KomaBean();
+
+        form.setSeason(season);
+        form.setD_code(d_code);
+        form.setS_code(s_code);
+        form.setDayofweak(dayofweak);
         komaService.update(form);
         return "redirect:/koma";
     }
+    
 
     @PostMapping(path = "delete")
-    String delete(@RequestParam String season,Integer d_code,Integer s_code,String dayofweak){
+    String delete(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak){
+        KomaForm form = new KomaForm();
+        form.setSeason(season);
+        form.setD_code(d_code);
+        form.setS_code(s_code);
+        form.setDayofweak(dayofweak);
         komaService.delete(season,d_code,s_code,dayofweak);
         return "redirect:/koma";
     }
 
-    @PostMapping(path = "edit",params = "goToTop")
-    String goToTop(){
-        return "redirect:/koma";
+    @PostMapping(path = "goTolist")
+    String goTolist(Model model){
+        model.addAttribute("koma",komaService.findAll());
+        return "koma/list";
     }
+
+    
 
     @PostMapping(path = "gohome")
     String gohome(){
