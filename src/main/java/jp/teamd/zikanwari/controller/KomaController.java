@@ -74,5 +74,10 @@ public class KomaController {
     String gohome(){
         return "/home";
     }
+
+    @PostMapping(path = "set")
+    String setkoma(){
+        return "koma/set";
+    }
 }
 

@@ -11,7 +11,7 @@
             <input type="submit" name="form" value="メインページへ" />
         </form>
         <h2>時間割追加ページ</h2>
-        <form th:action="@{/pages/create}" th:object="${komaForm}" method="post">
+        <form th:action="@{/koma/create}" th:object="${komaForm}" method="post">
             <table class="table table-striped table-bordered table-condensed">
                 <tr><td>科目コード:</td><td><input type="text" name="s_code" th:field="*{s_code}" th:errorclass="error-input"/><span th:if="${#fields.hasErrors('s_code')}"th:errors="*{s_code}" class="error-message">error!</span></td></tr>
             </table>

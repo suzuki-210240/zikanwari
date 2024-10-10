@@ -7,20 +7,20 @@
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     </head>
     <body>
-        <form th:action="@{/subject/gohome}" method="post">
+        <form th:action="@{/koma/gohome}" method="post">
             <input type="submit" name="form" value="メインページへ" />
         </form>
         <h2>科目確認ページ</h2>
         <h5>クラスを選択</h5>
-        <form  th:action="@{/subject/filter}" method="post">
+        <form  th:action="@{/koma/filter}" method="post">
             <select name="c_code" id="cbid">
                 <option value="" disabled selected>クラスを選択してください</option>
                 <option th:each="item : ${clss}" th:value="${item.c_code}" th:text="${item.c_code}"></option>
             </select>
             <input type="submit" name="form" value="検索" />
         </form>
-        <form th:action="@{/subject/set}" method="post">
-            <input type="submit" name="form" value="科目追加" />
+        <form th:action="@{/koma/set}" method="post">
+            <input type="submit" name="form" value="要素追加" />
         </form>
         
         <hr />

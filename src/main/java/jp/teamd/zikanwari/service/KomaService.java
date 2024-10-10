@@ -34,6 +34,7 @@ public class KomaService {
         KomaBean komaBean = new KomaBean();
         OnlineBean onlineBean = new OnlineBean();
 
+        System.out.println("1");
         
         Integer s_code = komaForm.getS_code();
         String season = komaRepositoryCustom.get_season(s_code);
@@ -42,13 +43,17 @@ public class KomaService {
         Integer setflg = komaRepositoryCustom.get_setflg(season, s_code);
         Integer onlineflg = 0;
         
-        
+        System.out.println("2");
         if(setflg > 0){
             Integer btime = komaRepositoryCustom.get_btime(s_code);
+            System.out.println("3");
             String onlineday = classRepositoryCustom.get_onlineday(s_code);
+
+            
 
             String[] days = new String[]{"月", "火", "水", "木", "金"};
             Integer[] f_time = new Integer[]{1,2,31,32,4,5};
+            System.out.println("4");
 
             //登録されていない週コマ数分繰り返し
             for(int i = 0; i < setflg; i++){
@@ -82,9 +87,11 @@ public class KomaService {
                                         onlineRepository.save(onlineBean);
                                         onlineflg = 1;
                                         r_number = 9999;
+                                        komaForm.setSeason(season);
                                         komaForm.setR_number(r_number);
                                         komaForm.setOnlineflg(onlineflg);
                                         komaForm.setDayofweak(dayofweak);
+                                        komaForm.setD_code(d_code);
                                         BeanUtils.copyProperties(komaForm, komaBean);
                                         komaRepository.save(komaBean);
                                         set_on = true;
@@ -92,9 +99,11 @@ public class KomaService {
                                         break;
                                     }
                                 }else{
+                                        komaForm.setSeason(season);
                                         komaForm.setR_number(r_number);
                                         komaForm.setOnlineflg(onlineflg);
                                         komaForm.setDayofweak(dayofweak);
+                                        komaForm.setD_code(d_code);
                                         BeanUtils.copyProperties(komaForm, komaBean);
                                         komaRepository.save(komaBean);
                                         set_on = true;
