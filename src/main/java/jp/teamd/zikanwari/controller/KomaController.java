@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.teamd.zikanwari.form.KomaForm;
 import jp.teamd.zikanwari.service.KomaService;
@@ -65,19 +66,30 @@ public class KomaController {
     }
     
     @PostMapping(path = "check")
-    public String check(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak,Model model) {
+    public String check(@RequestParam String season, @RequestParam Integer d_code, @RequestParam Integer s_code, @RequestParam String dayofweak, RedirectAttributes redirectAttributes) {
+        String mes;
         
-        if(komaService.check_room(season, d_code, dayofweak, s_code)){
-            if(komaService.check_teacher(season, d_code, dayofweak, d_code, s_code)){
-                model.addAttribute("message", "重複はありませんでした。");
-            }else{
-                model.addAttribute("message", "入力エラー：教員が重複しています");
+        if (komaService.check_setflg(season, s_code)) {
+            if (komaService.check_room(season, d_code, dayofweak, s_code)) {
+                if (komaService.check_teacher(season, d_code, dayofweak, d_code, s_code)) {
+                    mes = "重複はありませんでした。";
+                } else {
+                    mes = "入力エラー：教員が重複しています";
+                }
+            } else {
+                mes = "入力エラー：教室が重複しています";
             }
-        }else{
-            model.addAttribute("message", "入力エラー：教室が重複しています");
+        } else {
+            mes = "入力エラー：この科目はこれ以上追加できません";
         }
-        return "redirect:/koma"; // 更新後はリダイレクト
+
+        // メッセージをリダイレクト先に渡す
+        redirectAttributes.addFlashAttribute("message", mes);
+        
+        // リダイレクト先を指定
+        return "redirect:/koma/edit"; // 適切なリダイレクトURLに変更
     }
+
 
     @PostMapping("update")
     public String update(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak) {

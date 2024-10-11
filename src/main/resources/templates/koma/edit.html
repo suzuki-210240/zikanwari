@@ -46,7 +46,9 @@
                 </td>
             </tr>
         </table>
-        
+        <div th:if="${message}" class="alert alert-warning" role="alert">
+            <p th:text="${message}"></p>
+        </div>
         
         <div>
             <input type="submit" name="form" value="更新" />
@@ -55,26 +57,24 @@
             <input type="hidden" name="s_code" th:value="${koma.s_code}" />
             <input type="hidden" name="dayofweak" th:value="${koma.dayofweak}" />
         </div>
-        <div th:if="${message}" class="alert alert-warning" role="alert">
-            <p th:text="${message}"></p>
-        </div>
-        
-        <div>
-            <form th:action="@{/koma/check}" method="post" style="display:inline;">
-                <input type="submit" name="form" value="重複確認" />
-                <input type="hidden" name="season" th:value="${koma.season}" />
-                <input type="hidden" name="d_code" th:value="${koma.d_code}" />
-                <input type="hidden" name="s_code" th:value="${koma.s_code}" />
-                <input type="hidden" name="dayofweak" th:value="${koma.dayofweak}" />
-            </form>
-        </div>
         
         
-        <div>
-            <form th:action="@{/koma/goTolist}" method="post" style="display:inline;">
-                <input type="submit" name="form" value="戻る" />
-            </form>
-        </div>
     </form>
+    <div>
+        <form th:action="@{/koma/check}" method="post" style="display:inline;">
+            <input type="submit" name="form" value="重複確認" />
+            <input type="hidden" name="season" th:value="${koma.season}" />
+            <input type="hidden" name="d_code" th:value="${koma.d_code}" />
+            <input type="hidden" name="s_code" th:value="${koma.s_code}" />
+            <input type="hidden" name="dayofweak" th:value="${koma.dayofweak}" />
+        </form>
+    </div>
+    
+    
+    <div>
+        <form th:action="@{/koma/goTolist}" method="post" style="display:inline;">
+            <input type="submit" name="form" value="戻る" />
+        </form>
+    </div>
 </body>
 </html>

@@ -47,8 +47,6 @@ public class KomaService {
             System.out.println("3");
             String onlineday = classRepositoryCustom.get_onlineday(s_code);
 
-            
-
             String[] days = new String[]{"月", "火", "水", "木", "金"};
             Integer[] f_time = new Integer[]{1,2,31,32,4,5};
             System.out.println("4");
@@ -167,6 +165,15 @@ public class KomaService {
             return true; 
         }else{
             return false; 
+        }
+    }
+    public boolean check_setflg(String season,Integer s_code){
+        System.out.println("ok");
+        Integer setflg = komaRepositoryCustom.get_setflg(season, s_code);
+        if(setflg > 0){
+            return true;
+        }else{
+            return false;
         }
     }
 }

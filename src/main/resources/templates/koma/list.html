@@ -13,6 +13,9 @@
     </form>
     <h2>時間割確認ページ</h2>
     <table>
+        <div th:if="${message}" class="alert alert-warning" role="alert">
+            <p th:text="${message}"></p>
+        </div>
         <tr th:each="koma:${koma}">
             <td th:text="${koma.season}">受講時期</td>
             <td th:text="${koma.d_code}">コマ番号</td>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -146,22 +147,47 @@ public class KomaRepositoryCustomIdImpl implements KomaRepositoryCustom {
 
 
     @Override
-    public Integer get_setflg(String season,Integer s_code){
-        String table = "";
+    public Integer get_setflg(String season, Integer s_code) {
+        String table;
+        String jpql;
+
+        // All_SubjectBeanからalls_codeを取得
+        jpql = "SELECT s.alls_code FROM All_SubjectBean s WHERE s.sub_code = :s_code";
+        TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
+        query.setParameter("s_code", s_code);
+        
+        List<String> all = query.getResultList();
+
+        // テーブル名の決定
         if (season.equals("e")) {
-            table = "E_SubjectBean"; // equalsメソッドで文字列を比較
+            table = "E_SubjectBean";
         } else if (season.equals("l")) {
             table = "L_SubjectBean";
+        } else {
+            return 0; // 不正なseasonの場合はnullを返す
         }
 
-        String jpql = "SELECT s.setflg FROM " + table + " s WHERE s.sub_code = :s_code";
-        TypedQuery<Integer> query = entityManager.createQuery(jpql, Integer.class);
-        query.setParameter("s_code", s_code);
+        // setflgの取得
+        if (all.isEmpty()) {
+            jpql = "SELECT s.setflg FROM " + table + " s WHERE s.sub_code = :s_code";
+        } else {
+            jpql = "SELECT s.setflg FROM All_SubjectBean s WHERE s.sub_code = :s_code AND s.alls_code LIKE :alls_code";
+        }
 
-        Integer ret = query.getSingleResult();
-        return ret;
+        TypedQuery<Integer> queryFinal = entityManager.createQuery(jpql, Integer.class);
+        queryFinal.setParameter("s_code", s_code);
+        
+        if (!all.isEmpty()) {
+            queryFinal.setParameter("alls_code", "%" + season);
+        }
 
+        try {
+            return queryFinal.getSingleResult();
+        } catch (NoResultException e) {
+            return 0; // 結果が存在しない場合はnullを返す
+        }
     }
+
 
     @Override
     public Integer get_tnumber(Integer s_code) {
