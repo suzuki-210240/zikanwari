@@ -15,6 +15,8 @@ import jp.teamd.zikanwari.form.KomaForm;
 import jp.teamd.zikanwari.service.KomaService;
 import jp.teamd.zikanwari.service.SubjectService;
 import jp.teamd.zikanwari.service.ClassService;
+import jp.teamd.zikanwari.KomaId;
+
 
 
 
@@ -91,17 +93,16 @@ public class KomaController {
     }
 
 
-    @PostMapping("update")
-    public String update(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak) {
-        KomaForm form = new KomaForm();
-
-        form.setSeason(season);
-        form.setD_code(d_code);
-        form.setS_code(s_code);
-        form.setDayofweak(dayofweak);
-        komaService.update(form);
-        return "redirect:/koma";
-    }
+    // @PostMapping("update")
+    // public String update(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak,@RequestParam Integer r_number) {
+    //     KomaForm form = new KomaForm();
+        
+    //     form.setD_code(d_code);
+    //     form.setS_code(s_code);
+    //     form.setR_number(r_number);
+    //     komaService.update(form,season,d_code,s_code,dayofweak,r_number);
+    //     return "redirect:/koma";
+    // }
     
 
     @PostMapping(path = "delete")
@@ -133,6 +134,11 @@ public class KomaController {
         return "koma/set";
     }
 
-    
+    @GetMapping("/edit")
+    public String editKoma(Model model) {
+        model.addAttribute("koma", komaService.findAll());
+        model.addAttribute("clss", classService.findAll());
+        return "koma/edit";
+    }
 }
 

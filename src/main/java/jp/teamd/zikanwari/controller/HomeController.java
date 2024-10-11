@@ -43,7 +43,7 @@ public class HomeController {
     public String koma(@ModelAttribute KomaForm komaForm,Model model) {
         model.addAttribute("komaForm",komaForm);
         model.addAttribute("koma",komaService.findAll());
-        return "koma/list2";
+        return "koma/list";
     }
 
     @GetMapping("/koma/set")

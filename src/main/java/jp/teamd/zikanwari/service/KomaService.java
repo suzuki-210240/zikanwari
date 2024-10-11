@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jp.teamd.zikanwari.KomaId;
 import jp.teamd.zikanwari.bean.KomaBean;
 import jp.teamd.zikanwari.form.KomaForm;
@@ -14,6 +15,9 @@ import jp.teamd.zikanwari.repository.koma.KomaRepository;
 import jp.teamd.zikanwari.repository.koma.KomaRepositoryCustom;
 import jp.teamd.zikanwari.repository.OnlineRepository;
 import jp.teamd.zikanwari.repository.clss.ClassRepositoryCustom;
+
+import jp.teamd.zikanwari.KomaId;
+
 @Service
 public class KomaService {
     @Autowired
@@ -119,12 +123,19 @@ public class KomaService {
         return retflg;
     }
 
-    public KomaForm update(KomaForm komaForm){
-        KomaBean komaBean = new KomaBean();
-        BeanUtils.copyProperties(komaForm, komaBean);
-        komaRepository.save(komaBean);
-        return komaForm;
-    }
+    // public KomaForm update(KomaForm komaForm,String season, Integer d_code,Integer s_code,String dayofweak,Integer r_number) {
+    // // IDを使って既存のKomaBeanを取得
+    // KomaId komaId = KomaId.KomaId();
+    // KomaBean existingKomaBean = komaRepository.findById(null)
+    //         .orElseThrow(() -> new EntityNotFoundException("Koma not found with ID: " + komaForm.getId()));
+
+    // // プロパティをコピー
+    // BeanUtils.copyProperties(komaForm, existingKomaBean, "id"); // idを除外して上書きしない
+
+    // // 更新処理
+    // return komaRepository.save(existingKomaBean);
+//}
+
 
     public void delete(String season,Integer d_code,Integer s_code,String dayofweak){
         KomaId komaId = new KomaId(season,d_code,s_code,dayofweak);
@@ -168,7 +179,7 @@ public class KomaService {
         }
     }
     public boolean check_setflg(String season,Integer s_code){
-        System.out.println("ok");
+        System.out.println();
         Integer setflg = komaRepositoryCustom.get_setflg(season, s_code);
         if(setflg > 0){
             return true;
