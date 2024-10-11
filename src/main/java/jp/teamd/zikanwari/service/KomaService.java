@@ -14,8 +14,6 @@ import jp.teamd.zikanwari.repository.koma.KomaRepository;
 import jp.teamd.zikanwari.repository.koma.KomaRepositoryCustom;
 import jp.teamd.zikanwari.repository.OnlineRepository;
 import jp.teamd.zikanwari.repository.clss.ClassRepositoryCustom;
-import jp.teamd.zikanwari.repository.subject.SubjectRepository;
-
 @Service
 public class KomaService {
     @Autowired

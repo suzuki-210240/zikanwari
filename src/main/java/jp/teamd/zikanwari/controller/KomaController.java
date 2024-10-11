@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jp.teamd.zikanwari.bean.KomaBean;
 import jp.teamd.zikanwari.form.KomaForm;
 import jp.teamd.zikanwari.service.KomaService;
 import jp.teamd.zikanwari.service.SubjectService;
-import org.springframework.web.bind.annotation.RequestBody;
+import jp.teamd.zikanwari.service.ClassService;
 
 
 
@@ -25,6 +24,8 @@ public class KomaController {
     KomaService komaService;
     @Autowired
     SubjectService subjectService;
+    @Autowired
+    ClassService classService;
 
     @ModelAttribute
     KomaForm setUpForm(){
@@ -34,6 +35,7 @@ public class KomaController {
     @GetMapping
     String list(Model model){
         model.addAttribute("koma",komaService.findAll());
+        model.addAttribute("clss", classService.findAll());
         return "koma/list";
     }
 
@@ -80,7 +82,6 @@ public class KomaController {
     @PostMapping("update")
     public String update(@RequestParam String season,@RequestParam Integer d_code,@RequestParam Integer s_code,@RequestParam String dayofweak) {
         KomaForm form = new KomaForm();
-        KomaBean komaBean = new KomaBean();
 
         form.setSeason(season);
         form.setD_code(d_code);

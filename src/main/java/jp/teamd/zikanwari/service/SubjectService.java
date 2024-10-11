@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import jp.teamd.zikanwari.bean.SubjectBean;
 import jp.teamd.zikanwari.bean.E_SubjectBean;
 import jp.teamd.zikanwari.bean.L_SubjectBean;
-import jp.teamd.zikanwari.bean.All_SubjectBean;
 import jp.teamd.zikanwari.form.SubjectForm;
 import jp.teamd.zikanwari.repository.all_subject.All_SubjectRepositoryCustom;
 import jp.teamd.zikanwari.repository.e_subject.E_SubjectRepository;
